@@ -183,8 +183,6 @@ outputs:
       columns:
         - id: Ref
           name: Designator
-        - Val
-        - Package
         - id: PosX
           name: "Mid X"
         - id: PosY
@@ -202,12 +200,10 @@ outputs:
       exclude_filter: "only_jlc_parts"
       ref_separator: ","
       columns:
-        - field: "${QUANTITY}"
-          name: Quantity
         - field: "LCSC#"
           name: "LCSC Part #"
         - field: "Description"
-          name: Description
+          name: Comment
         - field: References
           name: Designator
         - Footprint
