@@ -258,7 +258,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": ""
+      "sch_revision": "${FULL_REVISION}"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -697,7 +697,7 @@
         "uuid": "00e66dc6-8046-499a-bdcf-3a30af1bf4d4"
       }
     ],
-    "used_designators": "#PWR1-34,J1,H1-4,D1-16",
+    "used_designators": "#L1,#FLG1-2,#PWR1-34,J1,H1-4,D1-16",
     "variants": []
   },
   "sheets": [
