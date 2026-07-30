@@ -37,8 +37,8 @@ jobs:
 
           # Hardware Files
           #
-          schema: "Hardware/RackDistribution-4U/RackDistribution-4U.kicad_sch"
-          board: "Hardware/RackDistribution-4U/RackDistribution-4U.kicad_pcb"
+          schema: "Hardware/LightPanel/LightPanel.kicad_sch"
+          board: "Hardware/LightPanel/LightPanel.kicad_pcb"
           #
 
       - name: upload results

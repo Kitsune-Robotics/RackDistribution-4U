@@ -1,6 +1,5 @@
-[![Docs](https://github.com/KenwoodFox/RackDistribution-4U/actions/workflows/docs_workflow.yml/badge.svg)](https://github.com/KenwoodFox/RackDistribution-4U/actions/workflows/docs_workflow.yml)
-[![Hardware](https://github.com/KenwoodFox/RackDistribution-4U/actions/workflows/hardware_workflow.yml/badge.svg)](https://github.com/KenwoodFox/RackDistribution-4U/actions/workflows/hardware_workflow.yml)
-[![Firmware](https://github.com/KenwoodFox/RackDistribution-4U/actions/workflows/firmware_workflow.yml/badge.svg)](https://github.com/KenwoodFox/RackDistribution-4U/actions/workflows/firmware_workflow.yml)
+[![Hardware](https://github.com/Kitsune-Robotics/RackDistribution-4U/actions/workflows/hardware_workflow.yml/badge.svg)](https://github.com/Kitsune-Robotics/RackDistribution-4U/actions/workflows/hardware_workflow.yml)
+[![Firmware](https://github.com/Kitsune-Robotics/RackDistribution-4U/actions/workflows/firmware_workflow.yml/badge.svg)](https://github.com/Kitsune-Robotics/RackDistribution-4U/actions/workflows/firmware_workflow.yml)
 
 
 # RackDistribution-4U
@@ -8,14 +7,14 @@
 ![Banner](Static/Banner.png)
 
 This repo contains all the firmware and hardware for the RackDistribution-4U.
-If you're looking for the latest docs/builds, see our [Releases Page](https://github.com/KenwoodFox/RackDistribution-4U/releases).
+If you're looking for the latest docs/builds, see our [Releases Page](https://github.com/Kitsune-Robotics/RackDistribution-4U/releases).
 
 # Getting Started
 
 First, clone this repo (and optionally checkout a branch)
 
 ```shell
-git clone https://github.com/KenwoodFox/RackDistribution-4U.git
+git clone https://github.com/Kitsune-Robotics/RackDistribution-4U.git
 cd RackDistribution-4U
 ```
 
@@ -33,4 +32,4 @@ git submodule update --init --recursive
 
 ## Project Layout
 
-If you want to use this project template for yourself, you can find it [here!](https://github.com/KenwoodFox/Project-Template)
+If you want to use this project template for yourself, you can find it [here!](https://github.com/Kitsune-Robotics/Project-Template)
