@@ -69,7 +69,13 @@
           "thermal_relief_spoke_width": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -203,7 +209,12 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0,
+        0.3,
+        0.6,
+        1.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -230,7 +241,12 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -661,13 +677,45 @@
         "uuid": "0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
       }
     ],
-    "used_designators": "H1-4,J1,#PWR1-16,M1-8,A1",
+    "used_designators": "Q1-8,R1-16,#FLG1-2,H1-4,J1,J401,#PWR1-38,M1-8,A1",
     "variants": []
   },
   "sheets": [
     [
       "0d3b5c69-c1f2-4eab-9f51-de1d9dac9894",
       "Root"
+    ],
+    [
+      "4b5fcaae-9e0c-4939-99e5-bcb8dde5d82b",
+      "Fan Output"
+    ],
+    [
+      "b498c0a6-5114-4fdb-8c71-abd72c5fb2ff",
+      "Fan Output1"
+    ],
+    [
+      "ed796959-e196-4a03-9c52-bbbb27f18f72",
+      "Fan Output2"
+    ],
+    [
+      "2e552afc-dcec-4b80-9f54-686ad7c15326",
+      "Fan Output3"
+    ],
+    [
+      "2e044f8d-c712-4cd3-88f5-f08c3236630a",
+      "Fan Output4"
+    ],
+    [
+      "941dab02-31b2-4d8d-a9b2-b16910241135",
+      "Fan Output5"
+    ],
+    [
+      "6a4583d5-71e1-4585-bb00-68155c4aeca7",
+      "Fan Output6"
+    ],
+    [
+      "7a92dd86-2d0d-4c0b-841e-dcdaa321ed19",
+      "Fan Output7"
     ]
   ],
   "text_variables": {},
