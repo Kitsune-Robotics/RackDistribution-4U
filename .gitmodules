@@ -1,3 +1,6 @@
 [submodule "Hardware/RackDistribution-4U/Libraries/kenwoodfox-kicad-libraries"]
 	path = Hardware/LightPanel/Libraries/kenwoodfox-kicad-libraries
 	url = https://github.com/KenwoodFox/kenwoodfox-kicad-libraries
+[submodule "Hardware/PumpMotherboard/Libraries/kenwoodfox-kicad-libraries"]
+	path = Hardware/PumpMotherboard/Libraries/kenwoodfox-kicad-libraries
+	url = https://github.com/KenwoodFox/kenwoodfox-kicad-libraries
