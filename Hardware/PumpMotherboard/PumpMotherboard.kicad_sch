@@ -115,7 +115,7 @@
 				)
 				(arc
 					(start -3.302 1.905)
-					(mid -3.9342 2.54)
+					(mid -3.9343 2.54)
 					(end -3.302 3.175)
 					(stroke
 						(width 0.254)
@@ -127,7 +127,7 @@
 				)
 				(arc
 					(start -3.302 1.905)
-					(mid -3.9342 2.54)
+					(mid -3.9343 2.54)
 					(end -3.302 3.175)
 					(stroke
 						(width 0.254)
@@ -3415,6 +3415,121 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:GNDA"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GNDA"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "GNDA_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GNDA_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:PWR_FLAG"
 			(power global)
 			(pin_numbers
@@ -3544,12 +3659,6 @@
 		(uuid "1e515876-d7cd-45ea-938e-c63987b9778a")
 	)
 	(junction
-		(at 224.79 31.75)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4afb8560-21b3-4948-b27d-3d9aec3856a0")
-	)
-	(junction
 		(at 105.41 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3584,12 +3693,20 @@
 		(uuid "132f2999-807e-47a9-9547-ef560f87376d")
 	)
 	(no_connect
+		(at 107.95 118.11)
+		(uuid "219e8d92-95a2-436a-9930-27f1cf1e4af7")
+	)
+	(no_connect
 		(at 153.67 138.43)
 		(uuid "36ca73c9-b20e-441c-8ea5-ff995b5d7275")
 	)
 	(no_connect
 		(at 153.67 133.35)
 		(uuid "3dc045d9-2c66-4754-b7a1-0daedd512f8e")
+	)
+	(no_connect
+		(at 107.95 115.57)
+		(uuid "559e12cf-960e-4f4b-a2a6-58825312e08f")
 	)
 	(no_connect
 		(at 153.67 130.81)
@@ -3843,16 +3960,6 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 31.75) (xy 223.52 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3c77e036-dc29-49a4-82ab-d8c5dd3ab511")
-	)
-	(wire
-		(pts
 			(xy 250.19 63.5) (xy 261.62 63.5)
 		)
 		(stroke
@@ -3953,7 +4060,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 31.75) (xy 224.79 31.75)
+			(xy 223.52 31.75) (xy 228.6 31.75)
 		)
 		(stroke
 			(width 0)
@@ -4223,16 +4330,6 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 161.29) (xy 156.21 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aed5c164-80de-4b2d-a717-5fa7422cc7fb")
-	)
-	(wire
-		(pts
 			(xy 101.6 52.07) (xy 105.41 52.07)
 		)
 		(stroke
@@ -4290,16 +4387,6 @@
 			(type default)
 		)
 		(uuid "c50e6cd6-85ad-42ba-86ef-732d89662488")
-	)
-	(wire
-		(pts
-			(xy 156.21 161.29) (xy 153.67 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c5d268f2-cda5-4198-88d2-2969c52a6cba")
 	)
 	(wire
 		(pts
@@ -4420,6 +4507,26 @@
 			(type default)
 		)
 		(uuid "e4ae0908-1f3e-4388-8dcf-2907fa368779")
+	)
+	(wire
+		(pts
+			(xy 160.02 161.29) (xy 153.67 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e581405b-705c-4263-a8bf-516af28c11bc")
+	)
+	(wire
+		(pts
+			(xy 160.02 176.53) (xy 160.02 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7943ee8-2750-4c3b-ae1b-24ad124bd776")
 	)
 	(wire
 		(pts
@@ -5662,6 +5769,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 125.73 96.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4acf8207-0947-49ad-bc21-88468ef82830")
+		(property "Reference" "#PWR053"
+			(at 125.73 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 125.73 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 125.73 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 125.73 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 125.73 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f416e853-ad94-40e6-ae56-ea8d152c4577")
+		)
+		(instances
+			(project "PumpMotherboard"
+				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
+					(reference "#PWR053")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Polarized")
 		(at 40.64 55.88 0)
 		(unit 1)
@@ -6069,8 +6254,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 224.79 31.75 180)
+		(lib_id "power:GNDA")
+		(at 160.02 176.53 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6079,9 +6264,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "6f655bf2-ab4e-4b3a-a2f4-40644c176477")
-		(property "Reference" "#FLG02"
-			(at 224.79 33.655 0)
+		(uuid "73395f90-865d-4926-aeb1-8b7e6e1ea3ad")
+		(property "Reference" "#PWR018"
+			(at 160.02 182.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6091,9 +6276,8 @@
 				)
 			)
 		)
-		(property "Value" "PWR_FLAG"
-			(at 224.79 36.83 0)
-			(hide yes)
+		(property "Value" "GNDA"
+			(at 160.02 181.61 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6103,7 +6287,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 224.79 31.75 0)
+			(at 160.02 176.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6114,7 +6298,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 224.79 31.75 0)
+			(at 160.02 176.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6124,8 +6308,8 @@
 				)
 			)
 		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 224.79 31.75 0)
+		(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
+			(at 160.02 176.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6136,12 +6320,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "729ebf90-fa28-41f5-948e-782b4739bbb6")
+			(uuid "83d3e70a-c45a-40cc-ade9-4097c6aff120")
 		)
 		(instances
 			(project "PumpMotherboard"
 				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
-					(reference "#FLG02")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -6552,84 +6736,6 @@
 			(project "PumpMotherboard"
 				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
 					(reference "R17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 156.21 165.1 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a08d009c-de76-46f9-9cad-57248084091e")
-		(property "Reference" "#PWR018"
-			(at 156.21 171.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 156.21 170.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 156.21 165.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 156.21 165.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 156.21 165.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5a33915c-2ee1-4449-8798-a93d71e30bf7")
-		)
-		(instances
-			(project "PumpMotherboard"
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
-					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -7354,8 +7460,8 @@
 				)
 			)
 		)
-		(property "Description" ""
-			(at 215.9 29.21 0)
+		(property "Description" "DC Barrel Jack"
+			(at 215.9 23.876 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

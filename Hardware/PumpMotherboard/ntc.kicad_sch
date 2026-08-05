@@ -466,7 +466,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:GND"
+		(symbol "power:GNDA"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -491,7 +491,7 @@
 					)
 				)
 			)
-			(property "Value" "GND"
+			(property "Value" "GNDA"
 				(at 0 -3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -523,7 +523,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -545,7 +545,7 @@
 					)
 				)
 			)
-			(symbol "GND_0_1"
+			(symbol "GNDA_0_1"
 				(polyline
 					(pts
 						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
@@ -559,7 +559,7 @@
 					)
 				)
 			)
-			(symbol "GND_1_1"
+			(symbol "GNDA_1_1"
 				(pin power_in line
 					(at 0 0 270)
 					(length 0)
@@ -757,92 +757,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 143.51 118.11 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a3507191-4183-4f77-96f3-e3274ebae6a7")
-		(property "Reference" "#PWR047"
-			(at 143.51 124.46 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 143.51 123.19 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 143.51 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 143.51 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 143.51 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "0d0996d8-3a5e-451f-97bc-86ed5554731e")
-		)
-		(instances
-			(project "PumpMotherboard"
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/2d92652e-b02e-4262-a61e-86e840250edc"
-					(reference "#PWR047")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/a1739991-ef04-4d0a-bf1d-a4c9667b9ae5"
-					(reference "#PWR050")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/dde12e12-524f-4370-b5e4-73acd2277053"
-					(reference "#PWR052")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3V3")
 		(at 143.51 97.79 0)
 		(unit 1)
@@ -922,6 +836,92 @@
 				)
 				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/dde12e12-524f-4370-b5e4-73acd2277053"
 					(reference "#PWR051")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDA")
+		(at 143.51 118.11 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "de2f0797-a30d-44d0-b737-eeba1d18dfc8")
+		(property "Reference" "#PWR047"
+			(at 143.51 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GNDA"
+			(at 143.51 123.19 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.51 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.51 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
+			(at 143.51 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d7146519-268a-4395-9f78-728769ac887c")
+		)
+		(instances
+			(project "PumpMotherboard"
+				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/2d92652e-b02e-4262-a61e-86e840250edc"
+					(reference "#PWR047")
+					(unit 1)
+				)
+				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/a1739991-ef04-4d0a-bf1d-a4c9667b9ae5"
+					(reference "#PWR050")
+					(unit 1)
+				)
+				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/dde12e12-524f-4370-b5e4-73acd2277053"
+					(reference "#PWR052")
 					(unit 1)
 				)
 			)
