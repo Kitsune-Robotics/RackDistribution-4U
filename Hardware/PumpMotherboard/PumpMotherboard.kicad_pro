@@ -677,7 +677,7 @@
         "uuid": "0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
       }
     ],
-    "used_designators": "Q1-8,R1-16,#FLG1-2,H1-4,J1,J401,#PWR1-38,M1-8,A1",
+    "used_designators": "U1-2,Q1-8,R1-21,#FLG1-3,H1-4,J1-5,J401,#PWR1-52,L1,M1-8,D1,C1-2,A1",
     "variants": []
   },
   "sheets": [
@@ -716,6 +716,18 @@
     [
       "7a92dd86-2d0d-4c0b-841e-dcdaa321ed19",
       "Fan Output7"
+    ],
+    [
+      "2d92652e-b02e-4262-a61e-86e840250edc",
+      "NTC Sensor"
+    ],
+    [
+      "a1739991-ef04-4d0a-bf1d-a4c9667b9ae5",
+      "NTC Sensor1"
+    ],
+    [
+      "dde12e12-524f-4370-b5e4-73acd2277053",
+      "NTC Sensor2"
     ]
   ],
   "text_variables": {},
