@@ -33,6 +33,7 @@ _autosave-*
 fp-info-cache
 *auto_saved_files#
 *.lck
+.history
 
 # Netlist files (exported from Eeschema)
 *.net
