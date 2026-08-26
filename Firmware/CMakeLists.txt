@@ -43,6 +43,7 @@ target_include_directories(freertos_kernel PUBLIC
 
 add_executable(rack_distribution
         main.c
+        lib/analog_task.c
         lib/freertos_support.c
         lib/indicators.c
         lib/neopixel_ws2812/neopixel_ws2812.c
@@ -60,6 +61,8 @@ target_link_libraries(rack_distribution
         pico_stdlib
         hardware_pio
         hardware_clocks
+        hardware_adc
+        m
         freertos_kernel
 )
 
