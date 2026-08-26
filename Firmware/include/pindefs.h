@@ -1,0 +1,5 @@
+#pragma once
+
+#define NEOPIXEL_PIN 0
+#define NEOPIXEL_NUM_PIXELS 16
+#define NEOPIXEL_FREQ_HZ 800000.0f
