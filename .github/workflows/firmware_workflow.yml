@@ -9,68 +9,42 @@ on:
   pull_request:
     paths:
       - "Firmware/**"
-      - ".github/workflows/**"
+      - ".github/workflows/firmware_workflow.yml"
 
-#
+env:
+  FLASH_TOTAL_KB: 2048
+  RAM_TOTAL_KB: 264
+
 jobs:
-  make_firmware:
+  build:
     runs-on: ubuntu-latest
-    name: Firmware Builder
-
     steps:
-      - uses: actions/checkout@v4
-      - name: Cache pip
-        uses: actions/cache@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Cache PlatformIO
-        uses: actions/cache@v4
-        with:
-          path: ~/.platformio
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-      - name: Set up Python
-        uses: actions/setup-python@v5
-      - name: Install PlatformIO
+          submodules: recursive
+
+      - name: Install deps
         run: |
-          python -m pip install --upgrade pip
-          pip install --upgrade platformio
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            cmake \
+            git \
+            python3 \
+            gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi \
+            libstdc++-arm-none-eabi-newlib
 
-      - name: Run PlatformIO
-        run: cd Firmware && make build
+      - name: Configure
+        run: cmake -S Firmware -B Firmware/build
 
-      - uses: actions/upload-artifact@v4
+      - name: Build
+        run: cmake --build Firmware/build -j"$(nproc)"
+
+      - name: Upload UF2
+        uses: actions/upload-artifact@v4
         with:
-          name: Display_Binaries
-          path: Firmware/.pio/build/ATmega328P/firmware.*
-
-  delint:
-    runs-on: ubuntu-latest
-    name: Delinter
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Cache PlatformIO
-        uses: actions/cache@v4
-        with:
-          path: ~/.platformio
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-      - name: Set up Python
-        uses: actions/setup-python@v5
-      - name: Install PlatformIO
-        run: |
-          python -m pip install --upgrade pip
-          pip install --upgrade platformio
-
-      - name: Run Delinter
-        run: cd Firmware && pio check
-#
+          name: rack_distribution-uf2
+          path: Firmware/build/rack_distribution.uf2
+          if-no-files-found: error
