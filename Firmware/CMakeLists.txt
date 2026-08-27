@@ -47,6 +47,11 @@ add_executable(rack_distribution
         lib/freertos_support.c
         lib/indicators.c
         lib/neopixel_ws2812/neopixel_ws2812.c
+        states/states.c
+        states/state_init.c
+        states/state_standby.c
+        states/state_run.c
+        states/state_cooldown.c
 )
 
 pico_generate_pio_header(rack_distribution
@@ -55,6 +60,7 @@ pico_generate_pio_header(rack_distribution
 target_include_directories(rack_distribution PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/lib/neopixel_ws2812
+        ${CMAKE_CURRENT_LIST_DIR}/states
 )
 
 target_link_libraries(rack_distribution

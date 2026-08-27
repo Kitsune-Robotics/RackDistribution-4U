@@ -8,6 +8,8 @@
 _Static_assert(INDICATOR_COUNT * LEDS_PER_INDICATOR == NEOPIXEL_NUM_PIXELS,
                "8 indicators * 2 leds != pixel count");
 
+indicators_t g_indicators;
+
 void indicator_set(indicator_t *ind, indicator_mode_t mode, led_color_t color) {
   if (!ind) {
     return;
@@ -16,12 +18,7 @@ void indicator_set(indicator_t *ind, indicator_mode_t mode, led_color_t color) {
   ind->color = (mode == INDICATOR_OFF) ? COLOR_OFF : color;
 }
 
-void indicators_clear(indicators_t *inds) {
-  if (!inds) {
-    return;
-  }
-  memset(inds, 0, sizeof(*inds));
-}
+void indicators_clear(void) { memset(&g_indicators, 0, sizeof(g_indicators)); }
 
 static bool indicator_lit(indicator_mode_t mode, uint32_t now_ms) {
   switch (mode) {
@@ -37,14 +34,13 @@ static bool indicator_lit(indicator_mode_t mode, uint32_t now_ms) {
   }
 }
 
-void indicators_flush(const indicators_t *inds, neopixel_ws2812_t *strip,
-                      uint32_t now_ms) {
-  if (!inds || !strip) {
+void indicators_flush(neopixel_ws2812_t *strip, uint32_t now_ms) {
+  if (!strip) {
     return;
   }
 
   for (unsigned i = 0; i < INDICATOR_COUNT; i++) {
-    const indicator_t *ind = &inds->by_index[i];
+    const indicator_t *ind = &g_indicators.by_index[i];
     const bool on = indicator_lit(ind->mode, now_ms);
     const uint8_t r = on ? ind->color.r : 0;
     const uint8_t g = on ? ind->color.g : 0;

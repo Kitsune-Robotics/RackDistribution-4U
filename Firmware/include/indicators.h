@@ -52,10 +52,11 @@ typedef union {
   indicator_t by_index[INDICATOR_COUNT];
 } indicators_t;
 
+extern indicators_t g_indicators;
+
 void indicator_set(indicator_t *ind, indicator_mode_t mode, led_color_t color);
-void indicators_clear(indicators_t *inds);
-void indicators_flush(const indicators_t *inds, neopixel_ws2812_t *strip,
-                      uint32_t now_ms);
+void indicators_clear(void);
+void indicators_flush(neopixel_ws2812_t *strip, uint32_t now_ms);
 
 static inline void indicator_solid(indicator_t *ind, led_color_t color) {
   indicator_set(ind, INDICATOR_SOLID, color);
