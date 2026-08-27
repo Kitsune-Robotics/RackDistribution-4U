@@ -15,11 +15,11 @@ static bool cdc_open(void) {
 
 static void update_control_light(void) {
   if (cdc_open()) {
-    indicator_flash(&g_indicators.control, COLOR_GREEN);
-  } else if (tud_ready()) {
     indicator_solid(&g_indicators.control, COLOR_GREEN);
-  } else {
+  } else if (tud_ready()) {
     indicator_solid(&g_indicators.control, COLOR_YELLOW);
+  } else {
+    indicator_flash(&g_indicators.control, COLOR_YELLOW);
   }
 }
 
