@@ -1,5 +1,6 @@
 #include "FreeRTOS.h"
 #include "analog.h"
+#include "aquacomputer.h"
 #include "indicators.h"
 #include "neopixel_ws2812.h"
 #include "pico/stdio.h"
@@ -33,6 +34,11 @@ int main(void) {
     vApplicationMallocFailedHook();
   }
   if (xTaskCreate(analog_task, "analog", 512, NULL, 2, NULL) != pdPASS) {
+    vApplicationMallocFailedHook();
+  }
+
+  // For the aquacomputer comms
+  if (xTaskCreate(aquacomputer_task, "aqc", 512, NULL, 2, NULL) != pdPASS) {
     vApplicationMallocFailedHook();
   }
 

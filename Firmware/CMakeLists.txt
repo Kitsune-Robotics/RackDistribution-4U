@@ -52,22 +52,41 @@ add_executable(rack_distribution
         states/state_standby.c
         states/state_run.c
         states/state_cooldown.c
+        aquacomputer/usb_descriptors.c
+        aquacomputer/aquacomputer.c
+        aquacomputer/msc_uf2.c
 )
 
 pico_generate_pio_header(rack_distribution
         ${CMAKE_CURRENT_LIST_DIR}/lib/neopixel_ws2812/ws2812.pio)
 
 target_include_directories(rack_distribution PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/aquacomputer
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/lib/neopixel_ws2812
         ${CMAKE_CURRENT_LIST_DIR}/states
 )
 
+target_compile_definitions(rack_distribution PRIVATE
+        PICO_STDIO_USB_USE_DEFAULT_DESCRIPTORS=0
+        PICO_STDIO_USB_ENABLE_TINYUSB_INIT=1
+        PICO_STDIO_USB_ENABLE_IRQ_BACKGROUND_TASK=1
+        PICO_ENABLE_USB_RESET_VIA_VENDOR_INTERFACE=1
+        PICO_ENABLE_USB_RESET_VIA_BAUD_RATE=1
+        PICO_USB_RESET_SUPPORT_MS_OS_20_DESCRIPTOR=1
+        PICO_USB_RESET_MS_OS_20_DESCRIPTOR_ITF=4
+        PICO_USB_RESET_INCLUDE_DEFAULT_APP_DRIVER_CB=1
+)
+
 target_link_libraries(rack_distribution
         pico_stdlib
+        tinyusb_device
+        pico_unique_id
         hardware_pio
         hardware_clocks
         hardware_adc
+        hardware_flash
+        hardware_sync
         m
         freertos_kernel
 )

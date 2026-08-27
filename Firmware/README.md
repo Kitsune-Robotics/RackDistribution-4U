@@ -17,8 +17,10 @@ make
 
 ## To load
 
-```shell
-picotool load -f -x rack_distribution.uf2
-```
+The running firmware is a composite USB device: Quadro HID, CDC, and a `RACKDIST` drive. Copy a UF2 onto that drive to update, or:
 
-Or drop the uf2 on the Pico in BOOTSEL.
+From the build directory:
+
+```shell
+../aquacomputer/pico-load rack_distribution.uf2
+```

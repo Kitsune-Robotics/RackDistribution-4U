@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Copy a UF2 onto RACKDIST (running app) or RPI-RP2 (BOOTSEL).
+set -euo pipefail
+
+UF2="${1:-rack_distribution.uf2}"
+[[ -f "$UF2" ]] || { echo "usage: $0 <firmware.uf2>" >&2; exit 1; }
+
+volume() {
+  local label
+  for label in RACKDIST RPI-RP2; do
+    [[ -e /dev/disk/by-label/$label ]] && echo /dev/disk/by-label/$label && return
+  done
+  return 1
+}
+
+if ! dev=$(volume); then
+  tty=(/dev/serial/by-id/usb-Aquacomputer_quadro_*-if00)
+  [[ -e ${tty[0]} ]] || { echo "no RACKDIST/RPI-RP2 volume" >&2; exit 1; }
+  stty -F "${tty[0]}" 1200 || true
+  for _ in $(seq 1 40); do dev=$(volume) && break; sleep 0.25; done
+  [[ -n "${dev:-}" ]] || { echo "no UF2 volume after 1200 baud" >&2; exit 1; }
+fi
+
+mp=$(lsblk -no MOUNTPOINT "$dev" | sed '/^$/d' | head -n1)
+[[ -n "$mp" ]] || { udisksctl mount -b "$dev" >/dev/null; mp=$(lsblk -no MOUNTPOINT "$dev" | sed '/^$/d' | head -n1); }
+echo "copying $UF2 -> $mp/"
+cp "$UF2" "$mp/"
+sync
