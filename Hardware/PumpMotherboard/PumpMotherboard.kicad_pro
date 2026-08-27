@@ -231,6 +231,7 @@
         0.3,
         0.6,
         1.0,
+        1.625,
         2.1
       ],
       "tuning_pattern_settings": {
@@ -695,7 +696,7 @@
         "uuid": "0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
       }
     ],
-    "used_designators": "U1-2,Q1-8,R1-21,#FLG1-3,H1-4,J1-8,J401,#PWR1-56,L1,M1-8,D1,C1-2,A1",
+    "used_designators": "U1-2,Q1-10,R1-23,#FLG1-3,H1-4,J1-8,J401,#PWR1-58,L1,M1-8,D1,C1-2,A1",
     "variants": []
   },
   "sheets": [
