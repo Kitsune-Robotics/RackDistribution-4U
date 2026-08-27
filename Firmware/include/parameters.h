@@ -1,7 +1,8 @@
 #pragma once
 
-// Temperature thresholds
+// Temperature
 #define A_LITTLE_HOT_C 30.0f
+#define TSENSOR1_OFFSET_C 1.9f
 
 // State configs
 #define STATE_INIT_MS 4000

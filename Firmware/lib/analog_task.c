@@ -2,6 +2,7 @@
 
 #include "FreeRTOS.h"
 #include "hardware/adc.h"
+#include "parameters.h"
 #include "pindefs.h"
 #include "task.h"
 
@@ -51,7 +52,7 @@ void analog_task(void *pvParameters) {
   while (true) {
     uint16_t raw = adc_read_avg(TSENSOR1_ADC_CH, 8);
     float r = ntc_ohms_from_adc(raw);
-    g_tsensor1_c = ntc_c_from_ohms(r);
+    g_tsensor1_c = ntc_c_from_ohms(r) + TSENSOR1_OFFSET_C;
 
     printf("t1=%.1f C  R=%.0f\n", (double)g_tsensor1_c, (double)r);
     vTaskDelay(pdMS_TO_TICKS(200));

@@ -1,20 +1,15 @@
 #include "state_internal.h"
 
 #include "analog.h"
+#include "aquacomputer.h"
 #include "indicators.h"
 #include "parameters.h"
 #include "tusb.h"
 
-// When USB disconnected
 static TickType_t usb_lost_at;
 
-// More robust way to see if the USB is actually draining TX
-static bool cdc_open(void) {
-  return tud_cdc_connected() && tud_cdc_write_available() > 0;
-}
-
 static void update_control_light(void) {
-  if (cdc_open()) {
+  if (aquacomputer_hid_consumed()) {
     indicator_solid(&g_indicators.control, COLOR_GREEN);
   } else if (tud_ready()) {
     indicator_solid(&g_indicators.control, COLOR_YELLOW);

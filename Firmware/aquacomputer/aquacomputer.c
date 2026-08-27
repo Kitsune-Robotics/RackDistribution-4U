@@ -7,9 +7,11 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#include "pico/time.h"
 #include "pico/unique_id.h"
 
 #include <math.h>
+#include <stdbool.h>
 #include <string.h>
 
 #define AQC_SERIAL_OFFSET 0x03
@@ -30,6 +32,16 @@ static uint16_t g_flow_dl_h;
 static uint8_t g_ctrl[AQC_CTRL_REPORT_SIZE];
 static uint8_t g_save[AQC_SAVE_REPORT_SIZE];
 static uint32_t g_power_cycles = 1;
+static volatile uint32_t g_hid_consumed_us;
+
+#define HID_CONSUMED_US 3000000u
+
+static void mark_hid_consumed(void) { g_hid_consumed_us = time_us_32(); }
+
+bool aquacomputer_hid_consumed(void) {
+  uint32_t then = g_hid_consumed_us;
+  return then != 0 && (time_us_32() - then) < HID_CONSUMED_US;
+}
 
 static void put_be16(uint8_t *p, uint16_t v) {
   p[0] = (uint8_t)(v >> 8);
@@ -146,6 +158,7 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id,
       n = reqlen;
     }
     memcpy(buffer, tmp + 1, n);
+    mark_hid_consumed();
     return n;
   }
   return 0;
@@ -169,6 +182,14 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id,
     }
     g_save[0] = AQC_SAVE_REPORT_ID;
     memcpy(g_save + 1, buffer, bufsize);
+  }
+}
+
+void tud_hid_report_complete_cb(uint8_t instance, uint8_t const *report, uint16_t len) {
+  (void)instance;
+  (void)len;
+  if (report && report[0] == AQC_STATUS_REPORT_ID) {
+    mark_hid_consumed();
   }
 }
 

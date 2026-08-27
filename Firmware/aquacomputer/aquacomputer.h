@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdbool.h>
 #include <stdint.h>
 
 // Aquacomputer Quadro — what aquacomputer_d5next binds on.
@@ -27,3 +28,6 @@ void aquacomputer_set_flow_dl_h(uint16_t flow);
 
 // Last PWM written by the host, 0-255. 0 if never set.
 uint8_t aquacomputer_pwm(unsigned ch);
+
+// True if the host ACKed a status report recently (aquacomputer_d5next / hid).
+bool aquacomputer_hid_consumed(void);
