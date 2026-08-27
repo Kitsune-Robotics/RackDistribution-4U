@@ -67,6 +67,11 @@ target_include_directories(rack_distribution PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/states
 )
 
+# pico_usb_reset needs the reset interface # before usb_reset_config.h
+target_compile_options(rack_distribution PRIVATE
+        "SHELL:-include ${CMAKE_CURRENT_LIST_DIR}/include/usb_reset_itf.h"
+)
+
 target_compile_definitions(rack_distribution PRIVATE
         PICO_STDIO_USB_USE_DEFAULT_DESCRIPTORS=0
         PICO_STDIO_USB_ENABLE_TINYUSB_INIT=1
@@ -74,7 +79,6 @@ target_compile_definitions(rack_distribution PRIVATE
         PICO_ENABLE_USB_RESET_VIA_VENDOR_INTERFACE=1
         PICO_ENABLE_USB_RESET_VIA_BAUD_RATE=1
         PICO_USB_RESET_SUPPORT_MS_OS_20_DESCRIPTOR=1
-        PICO_USB_RESET_MS_OS_20_DESCRIPTOR_ITF=4
         PICO_USB_RESET_INCLUDE_DEFAULT_APP_DRIVER_CB=1
 )
 

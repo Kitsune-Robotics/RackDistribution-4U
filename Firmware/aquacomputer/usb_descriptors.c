@@ -1,17 +1,23 @@
 #include "aquacomputer.h"
 
+#include "parameters.h"
 #include "pico/unique_id.h"
-#include "pico/usb_reset.h"
 #include "tusb.h"
+#include "pico/usb_reset.h"
 
 #define USBD_VID AQC_USB_VID
 #define USBD_PID AQC_USB_PID
 
 #define USBD_ITF_CDC 0
 #define USBD_ITF_HID 2
+#if ENABLE_UF2_LOADER
 #define USBD_ITF_MSC 3
 #define USBD_ITF_RPI_RESET 4
 #define USBD_ITF_MAX 5
+#else
+#define USBD_ITF_RPI_RESET 3
+#define USBD_ITF_MAX 4
+#endif
 
 #if PICO_USB_RESET_SUPPORT_MS_OS_20_DESCRIPTOR
 static_assert(USBD_ITF_RPI_RESET == PICO_USB_RESET_MS_OS_20_DESCRIPTOR_ITF,
@@ -22,8 +28,10 @@ static_assert(USBD_ITF_RPI_RESET == PICO_USB_RESET_MS_OS_20_DESCRIPTOR_ITF,
 #define USBD_CDC_EP_OUT 0x02
 #define USBD_CDC_EP_IN 0x82
 #define USBD_HID_EP_IN 0x83
+#if ENABLE_UF2_LOADER
 #define USBD_MSC_EP_OUT 0x04
 #define USBD_MSC_EP_IN 0x84
+#endif
 
 #define USBD_CDC_CMD_MAX_SIZE 8
 #define USBD_CDC_IN_OUT_MAX_SIZE 64
@@ -35,12 +43,16 @@ static_assert(USBD_ITF_RPI_RESET == PICO_USB_RESET_MS_OS_20_DESCRIPTOR_ITF,
 #define USBD_STR_SERIAL 3
 #define USBD_STR_CDC 4
 #define USBD_STR_HID 5
+#if ENABLE_UF2_LOADER
 #define USBD_STR_MSC 6
 #define USBD_STR_RPI_RESET 7
+#else
+#define USBD_STR_RPI_RESET 6
+#endif
 
 #define USBD_DESC_LEN                                                                  \
-  (TUD_CONFIG_DESC_LEN + TUD_CDC_DESC_LEN + TUD_HID_DESC_LEN + TUD_MSC_DESC_LEN +      \
-   TUD_RPI_RESET_DESC_LEN)
+  (TUD_CONFIG_DESC_LEN + TUD_CDC_DESC_LEN + TUD_HID_DESC_LEN +                         \
+   TUD_RPI_RESET_DESC_LEN + (ENABLE_UF2_LOADER ? TUD_MSC_DESC_LEN : 0))
 
 static const tusb_desc_device_t usbd_desc_device = {
     .bLength = sizeof(tusb_desc_device_t),
@@ -93,7 +105,9 @@ static const uint8_t usbd_desc_cfg[USBD_DESC_LEN] = {
                        USBD_CDC_IN_OUT_MAX_SIZE),
     TUD_HID_DESCRIPTOR(USBD_ITF_HID, USBD_STR_HID, HID_ITF_PROTOCOL_NONE,
                        sizeof(desc_hid_report), USBD_HID_EP_IN, USBD_HID_EP_SIZE, 10),
+#if ENABLE_UF2_LOADER
     TUD_MSC_DESCRIPTOR(USBD_ITF_MSC, USBD_STR_MSC, USBD_MSC_EP_OUT, USBD_MSC_EP_IN, 64),
+#endif
     TUD_RPI_RESET_DESCRIPTOR(USBD_ITF_RPI_RESET, USBD_STR_RPI_RESET),
 };
 
@@ -105,7 +119,9 @@ static const char *const usbd_desc_str[] = {
     [USBD_STR_SERIAL] = usbd_serial_str,
     [USBD_STR_CDC] = "Board CDC",
     [USBD_STR_HID] = "quadro",
+#if ENABLE_UF2_LOADER
     [USBD_STR_MSC] = "UF2",
+#endif
     [USBD_STR_RPI_RESET] = "Reset",
 };
 

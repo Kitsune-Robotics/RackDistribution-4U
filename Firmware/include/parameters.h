@@ -4,6 +4,9 @@
 #define A_LITTLE_HOT_C 30.0f
 #define TSENSOR1_OFFSET_C 1.9f
 
+// 1 to enable
+#define ENABLE_UF2_LOADER 0
+
 // State configs
 #define STATE_INIT_MS 4000
 #define STATE_USB_LOST_MS 5000

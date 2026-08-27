@@ -1,5 +1,9 @@
 #include "msc_uf2.h"
 
+#include "parameters.h"
+
+#if ENABLE_UF2_LOADER
+
 #include "hardware/flash.h"
 #include "hardware/sync.h"
 #include "pico.h"
@@ -263,3 +267,5 @@ int32_t tud_msc_scsi_cb(uint8_t lun, uint8_t const scsi_cmd[16], void *buffer,
   tud_msc_set_sense(lun, SCSI_SENSE_ILLEGAL_REQUEST, 0x20, 0x00);
   return -1;
 }
+
+#endif

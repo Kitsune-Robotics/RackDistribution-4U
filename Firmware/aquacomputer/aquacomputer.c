@@ -1,7 +1,10 @@
 #include "aquacomputer.h"
 
 #include "analog.h"
+#include "parameters.h"
+#if ENABLE_UF2_LOADER
 #include "msc_uf2.h"
+#endif
 #include "tusb.h"
 
 #include "FreeRTOS.h"
@@ -200,10 +203,12 @@ void aquacomputer_task(void *pvParameters) {
   g_save[0] = AQC_SAVE_REPORT_ID;
 
   while (true) {
+#if ENABLE_UF2_LOADER
     if (msc_uf2_ready_to_apply()) {
       vTaskDelay(pdMS_TO_TICKS(250));
       msc_uf2_apply();
     }
+#endif
     uint8_t report[AQC_STATUS_REPORT_SIZE];
     fill_status(report);
     if (tud_hid_ready()) {
