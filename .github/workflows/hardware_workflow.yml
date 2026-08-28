@@ -51,31 +51,6 @@ jobs:
           name: ${{ matrix.variant }}
           path: _hardwareOutput
 
-  dev-publish:
-    # publish only to devs
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    name: Dev-Publish
-    needs: [KiCad_Hardware]
-    strategy:
-      fail-fast: false
-      matrix:
-        variant:
-          - LightPanel
-          - PumpMotherboard
-
-    steps:
-      - uses: actions/download-artifact@v7
-        with:
-          name: ${{ matrix.variant }}
-
-      - name: Upload KiCAD Artifacts
-        uses: edunad/actions-image@v2.0.3
-        with:
-          path: "${{ matrix.variant }}-3D_top.png"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          title: "${{ matrix.variant }}"
-
   publish:
     # Only run on tags
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
