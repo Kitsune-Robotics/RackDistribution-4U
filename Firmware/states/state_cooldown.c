@@ -24,13 +24,6 @@ void state_cooldown_tick(TickType_t now) {
   } else {
     cold_since = 0;
   }
-
-  // Check for warnings
-  if (analog_tsensor1_c() > A_LITTLE_HOT_C) {
-    indicator_flash(&g_indicators.a_little_hot, COLOR_RED);
-  } else {
-    indicator_off(&g_indicators.a_little_hot);
-  }
 }
 
 void state_cooldown_entry(void) {

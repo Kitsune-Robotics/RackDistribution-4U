@@ -4,6 +4,8 @@
 #include "indicators.h"
 #include "parameters.h"
 
+#include <stdbool.h>
+
 static volatile system_state_t g_state = STATE_INIT;
 static TickType_t g_entered;
 
@@ -31,7 +33,16 @@ void state_goto(system_state_t next) {
 }
 
 static void state_update_warnings(void) {
-  if (analog_tsensor1_c() > A_LITTLE_HOT_C) {
+  static bool a_little_hot;
+  const float t = analog_tsensor1_c();
+
+  if (t > A_LITTLE_HOT_C + A_LITTLE_HOT_HISTERESIS_C) {
+    a_little_hot = true;
+  } else if (t < A_LITTLE_HOT_C - A_LITTLE_HOT_HISTERESIS_C) {
+    a_little_hot = false;
+  }
+
+  if (a_little_hot) {
     indicator_flash(&g_indicators.a_little_hot, COLOR_RED);
   } else {
     indicator_off(&g_indicators.a_little_hot);

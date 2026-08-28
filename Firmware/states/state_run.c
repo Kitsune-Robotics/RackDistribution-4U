@@ -1,6 +1,5 @@
 #include "state_internal.h"
 
-#include "analog.h"
 #include "aquacomputer.h"
 #include "indicators.h"
 #include "parameters.h"
@@ -28,13 +27,6 @@ void state_run_tick(TickType_t now) {
   } else if ((now - usb_lost_at) >= pdMS_TO_TICKS(STATE_USB_LOST_MS)) {
     state_goto(STATE_COOLDOWN);
     return;
-  }
-
-  // Check for warnings
-  if (analog_tsensor1_c() > A_LITTLE_HOT_C) {
-    indicator_flash(&g_indicators.a_little_hot, COLOR_RED);
-  } else {
-    indicator_off(&g_indicators.a_little_hot);
   }
 }
 
