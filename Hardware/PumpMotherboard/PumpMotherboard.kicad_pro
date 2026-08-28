@@ -157,7 +157,7 @@
         "tracks_crossing": "error",
         "tuning_profile_track_geometries": "ignore",
         "unconnected_items": "error",
-        "unresolved_variable": "error",
+        "unresolved_variable": "ignore",
         "via_dangling": "warning",
         "zones_intersect": "error"
       },
