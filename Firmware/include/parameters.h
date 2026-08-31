@@ -1,5 +1,10 @@
 #pragma once
 
+// Fans
+#define FAN_PWM_HZ 25000.0f
+#define FAN_TACH_PPR 2
+#define FAN_RPM_WINDOW_MS 200
+
 // Temperature
 #define A_LITTLE_HOT_C 30.0f
 #define A_LITTLE_HOT_HISTERESIS_C 0.25f

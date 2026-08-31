@@ -47,10 +47,10 @@ void analog_task(void *pvParameters) {
   (void)pvParameters;
 
   adc_init();
-  adc_gpio_init(TSENSOR1_PIN);
+  adc_gpio_init(TSENSOR_1_PIN);
 
   while (true) {
-    uint16_t raw = adc_read_avg(TSENSOR1_ADC_CH, 8);
+    uint16_t raw = adc_read_avg(TSENSOR_1_ADC_CH, 8);
     float r = ntc_ohms_from_adc(raw);
     g_tsensor1_c = ntc_c_from_ohms(r) + TSENSOR1_OFFSET_C;
 
