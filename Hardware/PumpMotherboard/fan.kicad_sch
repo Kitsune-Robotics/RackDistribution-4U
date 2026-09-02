@@ -747,145 +747,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:+12V"
-			(power global)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "+12V"
-				(at 0 3.556 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"+12V\""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "+12V_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "+12V_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:+3V3"
 			(power global)
 			(pin_numbers
@@ -1199,13 +1060,23 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 91.44) (xy 156.21 93.98)
+			(xy 156.21 90.17) (xy 156.21 93.98)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "7f8208dd-7e55-46f3-806a-63344994fc4f")
+	)
+	(wire
+		(pts
+			(xy 158.75 90.17) (xy 156.21 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82c89ef1-2b3a-4a5b-bf6b-06355460c685")
 	)
 	(wire
 		(pts
@@ -1256,6 +1127,30 @@
 			(type default)
 		)
 		(uuid "f8e99b49-f111-4c65-ab65-aa35e40a6777")
+	)
+	(global_label "12V_SWITCHED"
+		(shape input)
+		(at 158.75 90.17 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f95706f1-0cde-4e60-bf73-f7310ec45887")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 175.4632 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 	)
 	(hierarchical_label "PWM_IN"
 		(shape input)
@@ -1838,112 +1733,6 @@
 				)
 				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/ed796959-e196-4a03-9c52-bbbb27f18f72"
 					(reference "#PWR09")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+12V")
-		(at 156.21 91.44 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9ea959c7-4b9d-49cc-bb60-d60825ff8f5d")
-		(property "Reference" "#PWR01"
-			(at 156.21 95.25 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+12V"
-			(at 156.21 86.36 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 156.21 91.44 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 156.21 91.44 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 156.21 91.44 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "f221d032-32c5-4be7-86b7-1ba08a773c9a")
-		)
-		(instances
-			(project "PumpMotherboard"
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/2e044f8d-c712-4cd3-88f5-f08c3236630a"
-					(reference "#PWR014")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/2e552afc-dcec-4b80-9f54-686ad7c15326"
-					(reference "#PWR011")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/4b5fcaae-9e0c-4939-99e5-bcb8dde5d82b"
-					(reference "#PWR01")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/6a4583d5-71e1-4585-bb00-68155c4aeca7"
-					(reference "#PWR033")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/7a92dd86-2d0d-4c0b-841e-dcdaa321ed19"
-					(reference "#PWR037")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/941dab02-31b2-4d8d-a9b2-b16910241135"
-					(reference "#PWR029")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/b498c0a6-5114-4fdb-8c71-abd72c5fb2ff"
-					(reference "#PWR05")
-					(unit 1)
-				)
-				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894/ed796959-e196-4a03-9c52-bbbb27f18f72"
-					(reference "#PWR08")
 					(unit 1)
 				)
 			)

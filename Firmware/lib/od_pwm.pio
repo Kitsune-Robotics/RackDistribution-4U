@@ -1,0 +1,10 @@
+.program od_pwm
+
+; Open-drain PWM bank. Each FIFO word's low 16 bits are pindirs for
+; GPIO out_base .. +15. 1 = drive 0, 0 = high-Z (fan 5V pull-up).
+; Pin values stay 0. DMA feeds a 256-step table at 25 kHz.
+
+.wrap_target
+    out pindirs, 16
+    out null, 16
+.wrap

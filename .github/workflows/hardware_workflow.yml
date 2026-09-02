@@ -21,9 +21,15 @@ jobs:
   KiCad_Hardware:
     runs-on: ubuntu-latest
     name: KiCad Hardware
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - LightPanel
+          - PumpMotherboard
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           submodules: true
@@ -31,40 +37,19 @@ jobs:
       - uses: INTI-CMNB/KiBot@v2_k10
         with:
           # Config file
-          config: Hardware/config.kibot.yaml
+          config: Hardware/${{ matrix.variant }}.yaml
           # Prefix for output in config file.
           dir: _hardwareOutput
 
           # Hardware Files
-          #
-          schema: "Hardware/LightPanel/LightPanel.kicad_sch"
-          board: "Hardware/LightPanel/LightPanel.kicad_pcb"
-          #
+          schema: "Hardware/${{ matrix.variant }}/${{ matrix.variant }}.kicad_sch"
+          board: "Hardware/${{ matrix.variant }}/${{ matrix.variant }}.kicad_pcb"
 
       - name: upload results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
-          name: Board-Hardware
+          name: ${{ matrix.variant }}
           path: _hardwareOutput
-
-  dev-publish:
-    # publish only to devs
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    name: Dev-Publish
-    needs: [KiCad_Hardware]
-
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: Board-Hardware
-
-      - name: Upload KiCAD Artifacts
-        uses: edunad/actions-image@v2.0.0
-        with:
-          path: "*-3D_top.png"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          title: "PCB"
 
   publish:
     # Only run on tags
@@ -72,24 +57,30 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish
     needs: [KiCad_Hardware]
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - LightPanel
+          - PumpMotherboard
 
     steps:
       # Be in our repo
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
-          name: Board-Hardware
+          name: ${{ matrix.variant }}
 
       - run: mkdir -p _staging/
 
       - run: cp *.step _staging/
 
       # Copy gerbers
-      - run: cp PCBWay/*.zip _staging/Board-$(git rev-parse --short HEAD)-PCBWay.zip
-      - run: cp JLCPCB/*.zip _staging/Board-$(git rev-parse --short HEAD)-JLCPCB.zip
+      - run: cp PCBWay/*.zip "_staging/${{ matrix.variant }}-$(git rev-parse --short HEAD)-PCBWay.zip"
+      - run: cp JLCPCB/*.zip "_staging/${{ matrix.variant }}-$(git rev-parse --short HEAD)-JLCPCB.zip"
 
       - name: Upload artifacts to release
         uses: svenstaro/upload-release-action@v2
