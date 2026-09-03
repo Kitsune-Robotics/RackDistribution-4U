@@ -44,7 +44,7 @@ target_include_directories(freertos_kernel PUBLIC
 add_executable(rack_distribution
         main.c
         lib/analog_task.c
-        lib/fans.c
+        lib/fans/fans.c
         lib/freertos_support.c
         lib/indicators.c
         lib/neopixel_ws2812/neopixel_ws2812.c
@@ -61,11 +61,12 @@ add_executable(rack_distribution
 pico_generate_pio_header(rack_distribution
         ${CMAKE_CURRENT_LIST_DIR}/lib/neopixel_ws2812/ws2812.pio)
 pico_generate_pio_header(rack_distribution
-        ${CMAKE_CURRENT_LIST_DIR}/lib/od_pwm.pio)
+        ${CMAKE_CURRENT_LIST_DIR}/lib/fans/od_pwm.pio)
 
 target_include_directories(rack_distribution PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/aquacomputer
         ${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/lib/fans
         ${CMAKE_CURRENT_LIST_DIR}/lib/neopixel_ws2812
         ${CMAKE_CURRENT_LIST_DIR}/states
 )

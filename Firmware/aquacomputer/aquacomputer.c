@@ -26,7 +26,6 @@
 #define AQC_FLOW_OFFSET 0x6e
 
 static const uint16_t k_fan_offsets[AQC_NUM_FANS] = {0x70, 0x7d, 0x8a, 0x97};
-static const uint16_t k_pwm_offsets[AQC_NUM_FANS] = {0x37, 0x8c, 0xe1, 0x136};
 
 static uint16_t g_fan_rpm[AQC_NUM_FANS];
 static uint16_t g_temp_raw[AQC_NUM_TEMPS] = {0, AQC_SENSOR_NA, AQC_SENSOR_NA,
@@ -58,10 +57,6 @@ static void put_be32(uint8_t *p, uint32_t v) {
   p[3] = (uint8_t)v;
 }
 
-static uint16_t get_be16(const uint8_t *p) {
-  return (uint16_t)((p[0] << 8) | p[1]);
-}
-
 static uint16_t temp_to_aqc(float c) {
   if (!isfinite(c) || c < -50.0f || c > 150.0f) {
     return AQC_SENSOR_NA;
@@ -91,14 +86,6 @@ void aquacomputer_set_fan_rpm(unsigned ch, uint16_t rpm) {
 }
 
 void aquacomputer_set_flow_dl_h(uint16_t flow) { g_flow_dl_h = flow; }
-
-uint8_t aquacomputer_pwm(unsigned ch) {
-  if (ch >= AQC_NUM_FANS) {
-    return 0;
-  }
-  uint16_t centi = get_be16(&g_ctrl[k_pwm_offsets[ch]]);
-  return (uint8_t)((centi * 255u + 5000u) / 10000u);
-}
 
 static void fill_status(uint8_t *buf) {
   memset(buf, 0, AQC_STATUS_REPORT_SIZE);
