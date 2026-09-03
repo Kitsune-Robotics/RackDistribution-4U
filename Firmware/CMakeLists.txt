@@ -45,6 +45,8 @@ add_executable(rack_distribution
         main.c
         lib/analog_task.c
         lib/fans/fans.c
+        lib/fans/pwm.c
+        lib/fans/tach.c
         lib/freertos_support.c
         lib/indicators.c
         lib/neopixel_ws2812/neopixel_ws2812.c

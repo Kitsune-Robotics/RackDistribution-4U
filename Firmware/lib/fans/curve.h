@@ -2,38 +2,52 @@
 
 #include <stdint.h>
 
+#define FAN_COUNT 8
+#define FAN_CURVE_MAX 16
+
+typedef enum {
+  FAN_NONE = 0,
+  FAN_PUMP,
+  FAN_RAD,
+} fan_kind_t;
+
 typedef struct {
   float c;
   uint8_t duty;
-} fan_curve_pt_t;
+} fan_pt_t;
 
 typedef struct {
-  const fan_curve_pt_t *pts;
-  unsigned n;
-} fan_curve_ref_t;
+  fan_kind_t kind;
+  uint16_t low_rpm;
+  uint8_t n;
+  fan_pt_t curve[FAN_CURVE_MAX];
+} fan_ch_t;
 
-#define FAN_CURVE_LEN(a) ((unsigned)(sizeof(a) / sizeof((a)[0])))
-#define FAN_CURVE_REF(a) \
-  { (a), FAN_CURVE_LEN(a) }
+#define FAN_CH(kind_, low_, ...)                                               \
+  {                                                                            \
+    .kind = (kind_), .low_rpm = (low_),                                        \
+    .n = (uint8_t)(sizeof((fan_pt_t[]){__VA_ARGS__}) / sizeof(fan_pt_t)),      \
+    .curve = {__VA_ARGS__}                                                     \
+  }
 
-// Way to lookup any duty cycle for a given temp, interpolating between points
-static inline uint8_t fan_curve_lookup(const fan_curve_pt_t *pts, unsigned n,
-                                       float t) {
-  if (!pts || n == 0) {
+static inline uint8_t fan_duty_at(const fan_ch_t *ch, float t) {
+  if (!ch || ch->kind == FAN_NONE || ch->n == 0) {
     return 0;
   }
-  if (t <= pts[0].c) {
-    return pts[0].duty;
+  const fan_pt_t *p = ch->curve;
+  unsigned n = ch->n;
+  if (t <= p[0].c) {
+    return p[0].duty;
   }
-  if (t >= pts[n - 1].c) {
-    return pts[n - 1].duty;
+  if (t >= p[n - 1].c) {
+    return p[n - 1].duty;
   }
   for (unsigned i = 1; i < n; i++) {
-    if (t <= pts[i].c) {
-      float span = pts[i].c - pts[i - 1].c;
-      float u = span > 0.0f ? (t - pts[i - 1].c) / span : 0.0f;
-      float d = (float)pts[i - 1].duty +
-                u * (float)((int)pts[i].duty - (int)pts[i - 1].duty);
+    if (t <= p[i].c) {
+      float span = p[i].c - p[i - 1].c;
+      float u = span > 0.0f ? (t - p[i - 1].c) / span : 0.0f;
+      float d = (float)p[i - 1].duty +
+                u * (float)((int)p[i].duty - (int)p[i - 1].duty);
       if (d < 0.0f) {
         d = 0.0f;
       }
@@ -43,13 +57,5 @@ static inline uint8_t fan_curve_lookup(const fan_curve_pt_t *pts, unsigned n,
       return (uint8_t)(d + 0.5f);
     }
   }
-  return pts[n - 1].duty;
-}
-
-static inline uint8_t fan_curve_ref_lookup(const fan_curve_ref_t *curve,
-                                           float t) {
-  if (!curve) {
-    return 0;
-  }
-  return fan_curve_lookup(curve->pts, curve->n, t);
+  return p[n - 1].duty;
 }
