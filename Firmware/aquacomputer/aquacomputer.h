@@ -26,8 +26,5 @@ void aquacomputer_set_temp_c(unsigned ch, float c);
 void aquacomputer_set_fan_rpm(unsigned ch, uint16_t rpm);
 void aquacomputer_set_flow_dl_h(uint16_t flow);
 
-// Last PWM written by the host, 0-255. 0 if never set.
-uint8_t aquacomputer_pwm(unsigned ch);
-
 // True if the host ACKed a status report recently (aquacomputer_d5next / hid).
 bool aquacomputer_hid_consumed(void);

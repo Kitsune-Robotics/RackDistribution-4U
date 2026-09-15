@@ -1,6 +1,7 @@
 #include "state_internal.h"
 
 #include "analog.h"
+#include "fans.h"
 #include "indicators.h"
 #include "parameters.h"
 
@@ -34,6 +35,23 @@ void state_goto(system_state_t next) {
 
 static void state_update_warnings(void) {
   static bool a_little_hot;
+
+  if (fans_pump_low()) {
+    indicator_fast_flash(&g_indicators.low_pump_speed, COLOR_RED);
+  } else if (g_state != STATE_INIT) {
+    indicator_off(&g_indicators.low_pump_speed);
+  }
+
+  if (fans_fan_low()) {
+    indicator_fast_flash(&g_indicators.low_fan_speed, COLOR_RED);
+  } else if (g_state != STATE_INIT) {
+    indicator_off(&g_indicators.low_fan_speed);
+  }
+
+  if (g_state == STATE_INIT) {
+    return;
+  }
+
   const float t = analog_tsensor1_c();
 
   if (t > A_LITTLE_HOT_C + A_LITTLE_HOT_HISTERESIS_C) {
@@ -56,9 +74,7 @@ void state_task(void *pvParameters) {
 
   while (true) {
     k_ops[g_state].tick(xTaskGetTickCount());
-    if (g_state != STATE_INIT) {
-      state_update_warnings();
-    }
+    state_update_warnings();
     vTaskDelay(pdMS_TO_TICKS(25));
   }
 }
