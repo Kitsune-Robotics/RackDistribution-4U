@@ -56,7 +56,7 @@ add_executable(rack_distribution
         states/state_run.c
         states/state_cooldown.c
         aquacomputer/usb_descriptors.c
-        aquacomputer/aquacomputer.c
+        aquacomputer/hid.c
         aquacomputer/msc_uf2.c
 )
 
@@ -67,6 +67,7 @@ pico_generate_pio_header(rack_distribution
 
 target_include_directories(rack_distribution PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/aquacomputer
+        ${CMAKE_CURRENT_LIST_DIR}/../Software/rackdist
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/lib/fans
         ${CMAKE_CURRENT_LIST_DIR}/lib/neopixel_ws2812

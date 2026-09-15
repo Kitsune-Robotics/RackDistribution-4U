@@ -24,5 +24,4 @@
 #define CFG_TUD_MSC 0
 #endif
 
-// Quadro feature report 0x03 is 0x3c1 bytes including report ID.
-#define CFG_TUD_HID_EP_BUFSIZE 1024
+#define CFG_TUD_HID_EP_BUFSIZE 64

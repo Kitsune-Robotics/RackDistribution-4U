@@ -1,6 +1,6 @@
 #include "state_internal.h"
 
-#include "aquacomputer.h"
+#include "hid.h"
 #include "indicators.h"
 #include "parameters.h"
 #include "tusb.h"
@@ -8,7 +8,7 @@
 static TickType_t usb_lost_at;
 
 static void update_control_light(void) {
-  if (aquacomputer_hid_consumed()) {
+  if (hid_consumed()) {
     indicator_solid(&g_indicators.control, COLOR_GREEN);
   } else if (tud_ready()) {
     indicator_solid(&g_indicators.control, COLOR_YELLOW);

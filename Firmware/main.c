@@ -1,6 +1,6 @@
 #include "FreeRTOS.h"
 #include "analog.h"
-#include "aquacomputer.h"
+#include "hid.h"
 #include "fans.h"
 #include "indicators.h"
 #include "neopixel_ws2812.h"
@@ -41,8 +41,7 @@ int main(void) {
     vApplicationMallocFailedHook();
   }
 
-  // For the aquacomputer comms
-  if (xTaskCreate(aquacomputer_task, "aqc", 512, NULL, 2, NULL) != pdPASS) {
+  if (xTaskCreate(hid_task, "hid", 512, NULL, 2, NULL) != pdPASS) {
     vApplicationMallocFailedHook();
   }
 

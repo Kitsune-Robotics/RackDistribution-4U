@@ -15,6 +15,8 @@ all:
 clean:
 	$(MAKE) -C $(KDIR) M=$(CURDIR) clean
 
+# DKMS only updates the on-disk .ko. The running HID driver stays
+# until rmmod; hotplug reuses whatever is already loaded.
 dkms-install:
 	install -d $(SRC_DEST)
 	install -m 644 Makefile dkms.conf rackdist.c rackdist_hid.h $(SRC_DEST)

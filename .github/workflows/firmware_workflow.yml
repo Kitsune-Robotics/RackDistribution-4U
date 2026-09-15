@@ -9,6 +9,7 @@ on:
   pull_request:
     paths:
       - "Firmware/**"
+      - "Software/rackdist/rackdist_hid.h"
       - ".github/workflows/firmware_workflow.yml"
 
 env:

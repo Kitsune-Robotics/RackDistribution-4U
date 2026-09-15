@@ -1,6 +1,5 @@
 #include "internal.h"
 
-#include "aquacomputer.h"
 #include "config.h"
 #include "fans.h"
 #include "hardware/gpio.h"
@@ -76,8 +75,4 @@ void rpm_update(void) {
   g_pump_low = pump_low;
   g_fan_low = fan_low;
   g_rpm_ready = true;
-
-  for (unsigned i = 0; i < AQC_NUM_FANS; i++) {
-    aquacomputer_set_fan_rpm(i, g_rpm[i]);
-  }
 }

@@ -19,7 +19,7 @@ struct rackdist_data {
 	u8 status[RACKDIST_STATUS_REPORT_SIZE];
 };
 
-static const char *const temp_labels[] = { "Sensor 0", "Sensor 1", "Sensor 2" };
+static const char *const temp_labels[] = { "Air Temperature", "Coolant Temperature", "Exhaust Temperature" };
 static const char *const fan_labels[] = {
 	"Pump", "Radiator 1", "Radiator 2", "Radiator 3",
 	"Radiator 4", "Fan 6", "Fan 7", "Fan 8",
@@ -64,7 +64,7 @@ static int rackdist_read(struct device *dev, enum hwmon_sensor_types type,
 					  channel * 2);
 		if (temp == (s16)RACKDIST_TEMP_NA)
 			return -ENODATA;
-		*val = temp;
+		*val = (long)temp * 10;
 		return 0;
 	case hwmon_fan:
 		*val = get_unaligned_le16(priv->status + RACKDIST_OFF_FAN_RPM +
