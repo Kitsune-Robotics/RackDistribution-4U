@@ -4834,6 +4834,12 @@
 		(uuid "9a127729-ca1c-490c-916e-31b81ca8833c")
 	)
 	(junction
+		(at 96.52 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a2429095-1903-41bf-86ba-ec3c3fafa29b")
+	)
+	(junction
 		(at 34.29 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4990,6 +4996,16 @@
 			(type default)
 		)
 		(uuid "07e4b434-1de1-4bcd-a814-a7b9186907dd")
+	)
+	(wire
+		(pts
+			(xy 96.52 38.1) (xy 96.52 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08f24235-ceeb-404b-a0f0-f57cbb93e2e0")
 	)
 	(wire
 		(pts
@@ -5393,6 +5409,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 30.48) (xy 102.87 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a231f55-e5ae-499b-9981-0af923679c91")
+	)
+	(wire
+		(pts
 			(xy 99.06 128.27) (xy 107.95 128.27)
 		)
 		(stroke
@@ -5653,7 +5679,7 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 39.37) (xy 48.26 41.91)
+			(xy 48.26 39.37) (xy 48.26 43.18)
 		)
 		(stroke
 			(width 0)
@@ -5923,7 +5949,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 30.48) (xy 102.87 30.48)
+			(xy 95.25 30.48) (xy 96.52 30.48)
 		)
 		(stroke
 			(width 0)
@@ -8334,7 +8360,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 48.26 41.91 0)
+		(at 48.26 43.18 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8345,7 +8371,7 @@
 		(fields_autoplaced yes)
 		(uuid "65f93703-aa98-433c-b056-7bb1029237ec")
 		(property "Reference" "#PWR043"
-			(at 48.26 48.26 0)
+			(at 48.26 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8356,7 +8382,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 48.26 46.99 0)
+			(at 48.26 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8366,7 +8392,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 48.26 41.91 0)
+			(at 48.26 43.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8377,7 +8403,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 48.26 41.91 0)
+			(at 48.26 43.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8388,7 +8414,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 48.26 41.91 0)
+			(at 48.26 43.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9157,6 +9183,84 @@
 			(project "PumpMotherboard"
 				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
 					(reference "J7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 96.52 43.18 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8f23caaf-2321-4086-aeaa-d19ffda034f4")
+		(property "Reference" "#PWR060"
+			(at 96.52 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 96.52 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 96.52 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 96.52 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fc53e1b6-2fc0-4378-8e2b-03661dd3bdd4")
+		)
+		(instances
+			(project "PumpMotherboard"
+				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
+					(reference "#PWR060")
 					(unit 1)
 				)
 			)
@@ -10346,6 +10450,88 @@
 			(project "PumpMotherboard"
 				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
 					(reference "#PWR059")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Polarized")
+		(at 96.52 34.29 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ed3bbeed-1714-4a87-bb7a-2e93292b939d")
+		(property "Reference" "C3"
+			(at 100.33 32.1309 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 100.33 34.6709 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+			(at 97.4852 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Polarized capacitor"
+			(at 96.52 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1e6aed8c-aa13-49b2-b8c8-d848064a3aad")
+		)
+		(pin "2"
+			(uuid "046c1561-58b1-4351-a2d4-c0f47541b1a8")
+		)
+		(instances
+			(project "PumpMotherboard"
+				(path "/0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
+					(reference "C3")
 					(unit 1)
 				)
 			)
