@@ -23,6 +23,7 @@
 #define NEOPIXEL_NUM_PIXELS 16
 #define NEOPIXEL_FREQ_HZ 800000.0f
 #define AC_LEDS_PIN 17
+#define AC_LEDS_NUM_PIXELS 50 // idk the exact length
 
 // Switches
 #define SW_0_PIN 18
