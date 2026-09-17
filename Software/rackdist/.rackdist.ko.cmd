@@ -1,0 +1,1 @@
+savedcmd_rackdist.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T /usr/lib/modules/7.2.6-arch2-1/build/scripts/module.lds -o rackdist.ko rackdist.o rackdist.mod.o .module-common.o
