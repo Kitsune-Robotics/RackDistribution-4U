@@ -9676,7 +9676,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm"
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 180.34 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -9699,6 +9699,17 @@
 			)
 		)
 		(property "Description" "P-MOSFET transistor"
+			(at 175.26 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C16072"
 			(at 175.26 35.56 0)
 			(hide yes)
 			(show_name no)
