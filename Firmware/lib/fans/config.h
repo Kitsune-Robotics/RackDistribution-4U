@@ -10,4 +10,7 @@ static const fan_ch_t k_fans[FAN_COUNT] = {
     [2] = FAN_PROFILE_RAD,
     [3] = FAN_PROFILE_RAD,
     [4] = FAN_PROFILE_RAD,
+    [5] = FAN_NONE,
+    [6] = FAN_NONE,
+    [7] = FAN_NONE,
 };
