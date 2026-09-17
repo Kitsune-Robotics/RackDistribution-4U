@@ -55,7 +55,7 @@ static void state_update_warnings(void) {
     return;
   }
 
-  const float t = analog_tsensor1_c();
+  const float t = analog_tsensor0_c();
 
   if (t > A_LITTLE_HOT_C + A_LITTLE_HOT_HISTERESIS_C) {
     a_little_hot = true;

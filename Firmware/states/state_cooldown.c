@@ -15,7 +15,7 @@ void state_cooldown_tick(TickType_t now) {
   }
 
   // Check if the temperature is below the cold threshold
-  if (analog_tsensor1_c() < COOLDOWN_COLD_C) {
+  if (analog_tsensor0_c() < COOLDOWN_COLD_C) {
     if (cold_since == 0) {
       cold_since = now;
     } else if ((now - cold_since) >= pdMS_TO_TICKS(STATE_COOLDOWN_COLD_MS)) {

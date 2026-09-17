@@ -54,7 +54,7 @@ static void fill_status(uint8_t *buf) {
   for (unsigned i = 0; i < RACKDIST_NUM_TEMPS; i++) {
     put_le16(buf + RACKDIST_OFF_TEMP + i * 2, RACKDIST_TEMP_NA);
   }
-  put_le16(buf + RACKDIST_OFF_TEMP + 2, temp_to_raw(analog_tsensor1_c()));
+  put_le16(buf + RACKDIST_OFF_TEMP, temp_to_raw(analog_tsensor0_c()));
 
   for (unsigned i = 0; i < RACKDIST_NUM_FANS; i++) {
     put_le16(buf + RACKDIST_OFF_FAN_RPM + i * 2, fans_rpm(i));
