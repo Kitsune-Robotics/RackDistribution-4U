@@ -25,9 +25,9 @@ static void led_task(void *pvParameters) {
     TickType_t now = xTaskGetTickCount();
     indicators_flush(&strip, (uint32_t)now);
     if (state_get() == STATE_RUN) {
-      neopixel_ws2812_put_rgb(&ac, 48, 48, 48);
+      neopixel_ws2812_put_rgb(&ac, 220, 220, 220);
     } else {
-      neopixel_ws2812_put_rgb(&ac, 0, 0, 0);
+      neopixel_ws2812_put_rgb(&ac, 10, 0, 0);
     }
     vTaskDelay(pdMS_TO_TICKS(25));
   }
