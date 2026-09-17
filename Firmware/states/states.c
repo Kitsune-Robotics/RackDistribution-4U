@@ -6,8 +6,8 @@
 #include "indicators.h"
 #include "parameters.h"
 #include "pindefs.h"
+#include "usb_vbus.h"
 
-#include <math.h>
 #include <stdbool.h>
 
 static volatile system_state_t g_state = STATE_INIT;
@@ -57,16 +57,11 @@ static void state_update_warnings(void) {
   }
 
   const float t = analog_control_c();
-  const float air = analog_air_c();
-  const float hot = air + A_LITTLE_HOT_ABOVE_AIR_C;
+  const float hot = analog_ambient_c() + A_LITTLE_HOT_ABOVE_AIR_C;
 
-  if (isfinite(t) && isfinite(air)) {
-    if (t > hot + A_LITTLE_HOT_HISTERESIS_C) {
-      a_little_hot = true;
-    } else if (t < hot - A_LITTLE_HOT_HISTERESIS_C) {
-      a_little_hot = false;
-    }
-  } else {
+  if (t > hot + A_LITTLE_HOT_HISTERESIS_C) {
+    a_little_hot = true;
+  } else if (t < hot - A_LITTLE_HOT_HISTERESIS_C) {
     a_little_hot = false;
   }
 
@@ -83,6 +78,7 @@ void state_task(void *pvParameters) {
   gpio_init(LOAD_EN_PIN);
   gpio_put(LOAD_EN_PIN, 0);
   gpio_set_dir(LOAD_EN_PIN, GPIO_OUT);
+  usb_vbus_init();
 
   state_goto(STATE_INIT);
 

@@ -16,9 +16,9 @@ uint8_t fans_pwm_get(unsigned ch) {
 }
 
 static void curves_apply(void) {
-  float t = analog_control_c();
+  float dc = analog_control_c() - analog_ambient_c();
   for (unsigned i = 0; i < FAN_COUNT; i++) {
-    g_duty[i] = fan_duty_at(&k_fans[i], t);
+    g_duty[i] = fan_duty_at(&k_fans[i], dc);
   }
 }
 

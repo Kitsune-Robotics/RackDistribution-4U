@@ -2,11 +2,12 @@
 
 #include "indicators.h"
 #include "tusb.h"
+#include "usb_vbus.h"
 
 void state_standby_tick(TickType_t now) {
   (void)now;
-  if (tud_ready()) {
-    // If the usb is connected, go to run
+  // If usb NOT present, or we're ready to go. Go to run
+  if (!usb_vbus_present() || tud_ready()) {
     state_goto(STATE_RUN);
   }
 }

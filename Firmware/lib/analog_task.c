@@ -9,9 +9,9 @@
 #include <math.h>
 #include <stdio.h>
 
-static volatile float g_coolant_c;
-static volatile float g_air_c;
-static volatile float g_exhaust_c;
+static volatile float g_coolant_c = NAN;
+static volatile float g_air_c = NAN;
+static volatile float g_exhaust_c = NAN;
 
 float analog_coolant_c(void) { return g_coolant_c; }
 
@@ -19,12 +19,14 @@ float analog_air_c(void) { return g_air_c; }
 
 float analog_exhaust_c(void) { return g_exhaust_c; }
 
+float analog_ambient_c(void) {
+  float t = analog_air_c();
+  return isfinite(t) ? t : AMBIENT_FALLBACK_C;
+}
+
 float analog_control_c(void) {
   float t = analog_coolant_c();
-  if (isfinite(t)) {
-    return t;
-  }
-  return analog_air_c();
+  return isfinite(t) ? t : analog_ambient_c();
 }
 
 static uint16_t adc_read_avg(uint ch, unsigned n) {

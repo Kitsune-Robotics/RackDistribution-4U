@@ -31,6 +31,7 @@
 
 #define LOAD_EN_PIN 21
 #define PCSPKR_PIN 22
+#define USB_VBUS_PIN 24 /* Pico module VBUS divider*/
 
 // Temperature (GPIO / ADC channel)
 #define TSENSOR_0_PIN 26 /* coolant */
