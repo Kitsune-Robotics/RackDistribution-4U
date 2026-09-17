@@ -2,8 +2,10 @@
 
 #include "analog.h"
 #include "fans.h"
+#include "hardware/gpio.h"
 #include "indicators.h"
 #include "parameters.h"
+#include "pindefs.h"
 
 #include <stdbool.h>
 
@@ -29,6 +31,7 @@ TickType_t state_entered(void) { return g_entered; }
 void state_goto(system_state_t next) {
   g_state = next;
   g_entered = xTaskGetTickCount();
+  gpio_put(LOAD_EN_PIN, next != STATE_STANDBY);
   indicators_clear();
   k_ops[next].entry();
 }
@@ -69,6 +72,10 @@ static void state_update_warnings(void) {
 
 void state_task(void *pvParameters) {
   (void)pvParameters;
+
+  gpio_init(LOAD_EN_PIN);
+  gpio_put(LOAD_EN_PIN, 0);
+  gpio_set_dir(LOAD_EN_PIN, GPIO_OUT);
 
   state_goto(STATE_INIT);
 

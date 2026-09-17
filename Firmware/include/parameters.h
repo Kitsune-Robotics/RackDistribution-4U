@@ -11,7 +11,7 @@
 #define TSENSOR1_OFFSET_C 1.9f
 
 // 1 to enable
-#define ENABLE_UF2_LOADER 0
+#define ENABLE_UF2_LOADER 1
 
 // State configs
 #define STATE_INIT_MS 4000
