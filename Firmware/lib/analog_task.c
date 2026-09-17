@@ -23,15 +23,15 @@ static uint16_t adc_read_avg(uint ch, unsigned n) {
 }
 
 static float ntc_ohms_from_adc(uint16_t raw) {
-  // 3V3 -- 10k -- adc -- ntc -- gnd
+  // 3V3 -- ntc -- adc -- 10k -- gnd
   if (raw == 0) {
-    return 0.0f;
-  }
-  if (raw >= 4095) {
     return 1.0e6f;
   }
+  if (raw >= 4095) {
+    return 0.0f;
+  }
   float v = (float)raw / 4095.0f;
-  return TSENSOR_PULLUP_OHMS * v / (1.0f - v);
+  return TSENSOR_PULLUP_OHMS * (1.0f - v) / v;
 }
 
 static float ntc_c_from_ohms(float r) {
