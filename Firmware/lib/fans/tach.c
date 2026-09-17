@@ -63,6 +63,10 @@ void rpm_update(void) {
   if (state_get() != STATE_STANDBY) {
     for (unsigned i = 0; i < FAN_COUNT; i++) {
       const fan_ch_t *ch = &k_fans[i];
+      if (i == 5u) {
+        continue; /* Radiator 3 tach pin is dead */
+        // TODO: remove this once i fix it
+      }
       if (ch->kind != FAN_NONE && g_rpm[i] < ch->low_rpm) {
         if (ch->kind == FAN_PUMP) {
           pump_low = true;
