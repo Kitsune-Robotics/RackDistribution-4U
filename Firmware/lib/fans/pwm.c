@@ -1,5 +1,6 @@
 #include "internal.h"
 
+#include "config.h"
 #include "hardware/clocks.h"
 #include "hardware/dma.h"
 #include "hardware/gpio.h"
@@ -33,6 +34,9 @@ void pwm_wave_rebuild(void) {
   for (unsigned step = 0; step < PWM_WAVE_STEPS; step++) {
     uint32_t bits = 0;
     for (unsigned ch = 0; ch < FAN_COUNT; ch++) {
+      if (k_fans[ch].kind == FAN_NONE) {
+        continue;
+      }
       uint8_t duty = on ? g_duty[ch] : 0;
       uint16_t thresh =
           (uint16_t)(((uint32_t)duty * PWM_WAVE_STEPS + 127u) / 255u);

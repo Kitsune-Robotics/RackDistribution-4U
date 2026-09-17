@@ -33,10 +33,11 @@ void fans_task(void *pvParameters) {
     curves_apply();
     pwm_wave_rebuild();
     rpm_update();
-    printf("cool=%.1f  rpm %u %u %u %u  %u %u %u %u  pwm %u %u %u %u\n",
+    printf("cool=%.1f  rpm %u %u %u %u  %u %u %u %u  pwm %u %u %u %u  %u %u %u %u\n",
            (double)analog_control_c(), fans_rpm(0), fans_rpm(1), fans_rpm(2),
            fans_rpm(3), fans_rpm(4), fans_rpm(5), fans_rpm(6), fans_rpm(7),
-           g_duty[0], g_duty[1], g_duty[2], g_duty[3]);
+           g_duty[0], g_duty[1], g_duty[2], g_duty[3], g_duty[4], g_duty[5],
+           g_duty[6], g_duty[7]);
     vTaskDelay(pdMS_TO_TICKS(FAN_RPM_WINDOW_MS));
   }
 }

@@ -21,8 +21,9 @@ struct rackdist_data {
 
 static const char *const temp_labels[] = { "Air Temperature", "Coolant Temperature", "Exhaust Temperature" };
 static const char *const fan_labels[] = {
-	"Pump", "Radiator 1", "Radiator 2", "Radiator 3",
-	"Radiator 4", "Fan 6", "Fan 7", "Fan 8",
+	NULL, NULL, NULL,
+	"Radiator 1", "Radiator 2", "Radiator 3", "Radiator 4",
+	"Pump",
 };
 
 static umode_t rackdist_is_visible(const void *data, enum hwmon_sensor_types type,
@@ -32,10 +33,11 @@ static umode_t rackdist_is_visible(const void *data, enum hwmon_sensor_types typ
 	    (attr == hwmon_temp_input || attr == hwmon_temp_label))
 		return 0444;
 	if (type == hwmon_fan && channel < RACKDIST_NUM_FANS &&
+	    fan_labels[channel] &&
 	    (attr == hwmon_fan_input || attr == hwmon_fan_label))
 		return 0444;
 	if (type == hwmon_pwm && channel < RACKDIST_NUM_FANS &&
-	    attr == hwmon_pwm_input)
+	    fan_labels[channel] && attr == hwmon_pwm_input)
 		return 0444;
 	return 0;
 }

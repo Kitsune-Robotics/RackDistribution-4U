@@ -3,14 +3,14 @@
 #include "profile/pump.h"
 #include "profile/rad.h"
 
-// Channel map!
+// Channel map (1-based headers): 1-3 unused, 4-7 rad, 8 pump
 static const fan_ch_t k_fans[FAN_COUNT] = {
-    [0] = FAN_PROFILE_PUMP,
-    [1] = FAN_PROFILE_RAD,
-    [2] = FAN_PROFILE_RAD,
+    [0] = FAN_NONE,
+    [1] = FAN_NONE,
+    [2] = FAN_NONE,
     [3] = FAN_PROFILE_RAD,
     [4] = FAN_PROFILE_RAD,
-    [5] = FAN_NONE,
-    [6] = FAN_NONE,
-    [7] = FAN_NONE,
+    [5] = FAN_PROFILE_RAD,
+    [6] = FAN_PROFILE_RAD,
+    [7] = FAN_PROFILE_PUMP,
 };
