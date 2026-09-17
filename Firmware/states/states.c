@@ -7,6 +7,7 @@
 #include "parameters.h"
 #include "pindefs.h"
 
+#include <math.h>
 #include <stdbool.h>
 
 static volatile system_state_t g_state = STATE_INIT;
@@ -56,10 +57,16 @@ static void state_update_warnings(void) {
   }
 
   const float t = analog_control_c();
+  const float air = analog_air_c();
+  const float hot = air + A_LITTLE_HOT_ABOVE_AIR_C;
 
-  if (t > A_LITTLE_HOT_C + A_LITTLE_HOT_HISTERESIS_C) {
-    a_little_hot = true;
-  } else if (t < A_LITTLE_HOT_C - A_LITTLE_HOT_HISTERESIS_C) {
+  if (isfinite(t) && isfinite(air)) {
+    if (t > hot + A_LITTLE_HOT_HISTERESIS_C) {
+      a_little_hot = true;
+    } else if (t < hot - A_LITTLE_HOT_HISTERESIS_C) {
+      a_little_hot = false;
+    }
+  } else {
     a_little_hot = false;
   }
 

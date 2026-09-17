@@ -5,6 +5,8 @@
 #include "parameters.h"
 #include "tusb.h"
 
+#include <math.h>
+
 static TickType_t cold_since;
 
 void state_cooldown_tick(TickType_t now) {
@@ -14,8 +16,11 @@ void state_cooldown_tick(TickType_t now) {
     return;
   }
 
-  // Check if the temperature is below the cold threshold
-  if (analog_control_c() < COOLDOWN_COLD_C) {
+  // Stay in cooldown until coolant is close to ambient
+  const float t = analog_control_c();
+  const float air = analog_air_c();
+  if (isfinite(t) && isfinite(air) &&
+      t < air + COOLDOWN_COLD_ABOVE_AIR_C) {
     if (cold_since == 0) {
       cold_since = now;
     } else if ((now - cold_since) >= pdMS_TO_TICKS(STATE_COOLDOWN_COLD_MS)) {
