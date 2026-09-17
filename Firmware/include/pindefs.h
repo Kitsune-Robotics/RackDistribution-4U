@@ -33,13 +33,15 @@
 #define PCSPKR_PIN 22
 
 // Temperature (GPIO / ADC channel)
-#define TSENSOR_0_PIN 26
+#define TSENSOR_0_PIN 26 /* coolant */
 #define TSENSOR_0_ADC_CH 0
-#define TSENSOR_1_PIN 27
+#define TSENSOR_1_PIN 27 /* air */
 #define TSENSOR_1_ADC_CH 1
-#define TSENSOR_2_PIN 28
+#define TSENSOR_2_PIN 28 /* exhaust (optional) */
 #define TSENSOR_2_ADC_CH 2
 
 #define TSENSOR_PULLUP_OHMS 10000.0f
 #define NTC_R25_OHMS 10000.0f
 #define NTC_BETA 3950.0f
+#define NTC_SHORT_RAW 32
+#define NTC_OPEN_RAW 3900 /* ~200k / -30 C; unplugged sits near the 3V3 rail */

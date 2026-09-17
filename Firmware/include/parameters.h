@@ -8,7 +8,9 @@
 // Temperature
 #define A_LITTLE_HOT_C 30.0f
 #define A_LITTLE_HOT_HISTERESIS_C 0.25f
-#define TSENSOR0_OFFSET_C 1.9f
+#define TSENSOR0_OFFSET_C 1.9f /* coolant */
+#define TSENSOR1_OFFSET_C 0.0f /* air */
+#define TSENSOR2_OFFSET_C 0.0f /* exhaust */
 
 // 1 to enable
 #define ENABLE_UF2_LOADER 1

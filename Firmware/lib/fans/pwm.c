@@ -31,17 +31,17 @@ void pwm_wave_rebuild(void) {
   bool on = (st != STATE_STANDBY);
 
   for (unsigned step = 0; step < PWM_WAVE_STEPS; step++) {
-    uint32_t dirs = 0;
+    uint32_t bits = 0;
     for (unsigned ch = 0; ch < FAN_COUNT; ch++) {
       uint8_t duty = on ? g_duty[ch] : 0;
       uint16_t thresh =
           (uint16_t)(((uint32_t)duty * PWM_WAVE_STEPS + 127u) / 255u);
-      uint16_t low_steps = (uint16_t)(PWM_WAVE_STEPS - thresh);
-      if (step < low_steps) {
-        dirs |= 1u << k_pwm_pins[ch];
+      uint16_t npn_on_steps = (uint16_t)(PWM_WAVE_STEPS - thresh);
+      if (step < npn_on_steps) {
+        bits |= 1u << k_pwm_pins[ch];
       }
     }
-    g_pwm_wave[step] = dirs;
+    g_pwm_wave[step] = bits;
   }
 }
 
@@ -56,6 +56,7 @@ void pwm_init_all(void) {
     pio_gpio_init(g_pwm_pio, pin); // Initialize the GPIO pin
     gpio_disable_pulls(pin); // Disable the pull-ups
     gpio_set_drive_strength(pin, GPIO_DRIVE_STRENGTH_12MA); // Set the drive strength to 12mA
+    gpio_set_slew_rate(pin, GPIO_SLEW_RATE_FAST);
   }
 
   // ===========================
@@ -67,18 +68,16 @@ void pwm_init_all(void) {
   sm_config_set_out_pins(&c, 0, 16);
   sm_config_set_out_shift(&c, true, true, 32);
   sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);
+  sm_config_set_out_special(&c, true, false, 0);
 
-  // Set the clock division
   float div = (float)clock_get_hz(clk_sys) /
-              (FAN_PWM_HZ * (float)PWM_WAVE_STEPS * 2.0f);
+              (FAN_PWM_HZ * (float)PWM_WAVE_STEPS);
   sm_config_set_clkdiv(&c, div);
 
-  // Initialize the state machine
   pio_sm_init(g_pwm_pio, g_pwm_sm, offset, &c);
 
-  // Set the pins
   pio_sm_set_pins_with_mask(g_pwm_pio, g_pwm_sm, 0, PWM_PIN_MASK);
-  pio_sm_set_pindirs_with_mask(g_pwm_pio, g_pwm_sm, 0, PWM_PIN_MASK);
+  pio_sm_set_pindirs_with_mask(g_pwm_pio, g_pwm_sm, PWM_PIN_MASK, PWM_PIN_MASK);
 
   pwm_wave_rebuild();
 
