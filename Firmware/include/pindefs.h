@@ -23,6 +23,7 @@
 #define NEOPIXEL_NUM_PIXELS 16
 #define NEOPIXEL_FREQ_HZ 800000.0f
 #define AC_LEDS_PIN 17
+#define AC_LEDS_NUM_PIXELS 50 // idk the exact length
 
 // Switches
 #define SW_0_PIN 18
@@ -31,15 +32,18 @@
 
 #define LOAD_EN_PIN 21
 #define PCSPKR_PIN 22
+#define USB_VBUS_PIN 24 /* Pico module VBUS divider*/
 
 // Temperature (GPIO / ADC channel)
-#define TSENSOR_0_PIN 26
+#define TSENSOR_0_PIN 26 /* coolant */
 #define TSENSOR_0_ADC_CH 0
-#define TSENSOR_1_PIN 27
+#define TSENSOR_1_PIN 27 /* air */
 #define TSENSOR_1_ADC_CH 1
-#define TSENSOR_2_PIN 28
+#define TSENSOR_2_PIN 28 /* exhaust (optional) */
 #define TSENSOR_2_ADC_CH 2
 
 #define TSENSOR_PULLUP_OHMS 10000.0f
 #define NTC_R25_OHMS 10000.0f
 #define NTC_BETA 3950.0f
+#define NTC_SHORT_RAW 32
+#define NTC_OPEN_RAW 3900 /* ~200k / -30 C; unplugged sits near the 3V3 rail */

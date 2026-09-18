@@ -4,18 +4,18 @@
 #include "indicators.h"
 #include "parameters.h"
 #include "tusb.h"
+#include "usb_vbus.h"
 
 static TickType_t cold_since;
 
 void state_cooldown_tick(TickType_t now) {
-  if (tud_ready()) {
-    // Go back to RUN if usb comes back
+  if (!usb_vbus_present() || tud_ready()) {
     state_goto(STATE_RUN);
     return;
   }
 
-  // Check if the temperature is below the cold threshold
-  if (analog_tsensor1_c() < COOLDOWN_COLD_C) {
+  const float t = analog_control_c();
+  if (t < analog_ambient_c() + COOLDOWN_COLD_ABOVE_AIR_C) {
     if (cold_since == 0) {
       cold_since = now;
     } else if ((now - cold_since) >= pdMS_TO_TICKS(STATE_COOLDOWN_COLD_MS)) {

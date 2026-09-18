@@ -3,12 +3,16 @@
 #include "indicators.h"
 #include "parameters.h"
 #include "tusb.h"
+#include "usb_vbus.h"
 
 void state_init_tick(TickType_t now) {
-  // Wait till init time is over
-  if ((now - state_entered()) >= pdMS_TO_TICKS(STATE_INIT_MS)) {
-    // Go to standby if usb is not connected, otherwise go to run
-    state_goto(tud_ready() ? STATE_RUN : STATE_STANDBY);
+  if ((now - state_entered()) < pdMS_TO_TICKS(STATE_INIT_MS)) {
+    return;
+  }
+  if (!usb_vbus_present() || tud_ready()) {
+    state_goto(STATE_RUN);
+  } else {
+    state_goto(STATE_STANDBY);
   }
 }
 
