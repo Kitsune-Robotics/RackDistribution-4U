@@ -6,6 +6,7 @@
 #include "indicators.h"
 #include "parameters.h"
 #include "pindefs.h"
+#include "speaker.h"
 #include "usb_vbus.h"
 
 #include <stdbool.h>
@@ -79,12 +80,15 @@ void state_task(void *pvParameters) {
   gpio_put(LOAD_EN_PIN, 0);
   gpio_set_dir(LOAD_EN_PIN, GPIO_OUT);
   usb_vbus_init();
+  speaker_init();
+  speaker_beep();
 
   state_goto(STATE_INIT);
 
   while (true) {
     k_ops[g_state].tick(xTaskGetTickCount());
     state_update_warnings();
+    speaker_tick(g_state != STATE_INIT && indicators_flashing_red());
     vTaskDelay(pdMS_TO_TICKS(25));
   }
 }

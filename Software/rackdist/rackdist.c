@@ -21,8 +21,8 @@ struct rackdist_data {
 
 static const char *const temp_labels[] = { "Air Temperature", "Coolant Temperature", "Exhaust Temperature" };
 static const char *const fan_labels[] = {
-	NULL, NULL, NULL,
-	"Radiator 1", "Radiator 2", "Radiator 3", "Radiator 4",
+	NULL, NULL, "Radiator 2",
+	"Radiator 1", NULL, "Radiator 3", "Radiator 4",
 	"Pump",
 };
 

@@ -49,6 +49,7 @@ add_executable(rack_distribution
         lib/fans/tach.c
         lib/freertos_support.c
         lib/indicators.c
+        lib/speaker.c
         lib/neopixel_ws2812/neopixel_ws2812.c
         states/states.c
         states/state_init.c
@@ -98,6 +99,7 @@ target_link_libraries(rack_distribution
         hardware_clocks
         hardware_adc
         hardware_flash
+        hardware_pwm
         hardware_sync
         m
         freertos_kernel

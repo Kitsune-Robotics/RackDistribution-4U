@@ -14,6 +14,12 @@
 #define TSENSOR2_OFFSET_C 0.0f /* exhaust */
 #define AMBIENT_FALLBACK_C 20.0f
 
+// PC speaker
+#define PCSPKR_HZ 2000.0f
+#define PCSPKR_BEEP_MS 80
+#define PCSPKR_GAP_MS 80
+#define PCSPKR_PERIOD_MS 1000
+
 // 1 to enable
 #define ENABLE_UF2_LOADER 1
 
