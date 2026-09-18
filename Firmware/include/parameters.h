@@ -6,7 +6,7 @@
 #define FAN_RPM_WINDOW_MS 200
 
 // Temperature
-#define A_LITTLE_HOT_ABOVE_AIR_C 10.0f
+#define A_LITTLE_HOT_ABOVE_AIR_C 8.0f
 #define A_LITTLE_HOT_HISTERESIS_C 0.25f
 #define COOLDOWN_COLD_ABOVE_AIR_C 5.0f
 #define TSENSOR0_OFFSET_C 1.9f /* coolant */

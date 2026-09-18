@@ -59,7 +59,7 @@ extern indicators_t g_indicators;
 void indicator_set(indicator_t *ind, indicator_mode_t mode, led_color_t color);
 void indicators_clear(void);
 void indicators_flush(neopixel_ws2812_t *strip, uint32_t now_ms);
-bool indicators_flashing_red(void);
+bool indicators_fast_flashing_red(void);
 
 static inline void indicator_solid(indicator_t *ind, led_color_t color) {
   indicator_set(ind, INDICATOR_SOLID, color);

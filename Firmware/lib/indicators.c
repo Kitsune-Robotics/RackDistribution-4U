@@ -34,11 +34,11 @@ static bool indicator_lit(indicator_mode_t mode, uint32_t now_ms) {
   }
 }
 
-bool indicators_flashing_red(void) {
+bool indicators_fast_flashing_red(void) {
   for (unsigned i = 0; i < INDICATOR_COUNT; i++) {
     const indicator_t *ind = &g_indicators.by_index[i];
-    if ((ind->mode == INDICATOR_FLASH || ind->mode == INDICATOR_FAST_FLASH) &&
-        ind->color.r && !ind->color.g && !ind->color.b) {
+    if (ind->mode == INDICATOR_FAST_FLASH && ind->color.r && !ind->color.g &&
+        !ind->color.b) {
       return true;
     }
   }
