@@ -5,6 +5,7 @@
 #include "config.h"
 #include "internal.h"
 #include "parameters.h"
+#include "switches.h"
 #include "task.h"
 
 #include <stdio.h>
@@ -16,6 +17,12 @@ uint8_t fans_pwm_get(unsigned ch) {
 }
 
 static void curves_apply(void) {
+  if (switches_max_cool()) {
+    for (unsigned i = 0; i < FAN_COUNT; i++) {
+      g_duty[i] = 255;
+    }
+    return;
+  }
   float dc = analog_control_c() - analog_ambient_c();
   for (unsigned i = 0; i < FAN_COUNT; i++) {
     g_duty[i] = fan_duty_at(&k_fans[i], dc);

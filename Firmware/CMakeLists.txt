@@ -50,6 +50,7 @@ add_executable(rack_distribution
         lib/freertos_support.c
         lib/indicators.c
         lib/speaker.c
+        lib/switches.c
         lib/neopixel_ws2812/neopixel_ws2812.c
         states/states.c
         states/state_init.c

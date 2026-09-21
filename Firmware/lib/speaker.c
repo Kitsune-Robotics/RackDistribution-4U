@@ -6,6 +6,7 @@
 #include "hardware/pwm.h"
 #include "parameters.h"
 #include "pindefs.h"
+#include "switches.h"
 #include "task.h"
 
 static uint16_t g_half;
@@ -31,13 +32,16 @@ void speaker_init(void) {
 }
 
 void speaker_beep(void) {
+  if (switches_mute()) {
+    return;
+  }
   speaker_tone(true);
   vTaskDelay(pdMS_TO_TICKS(PCSPKR_BEEP_MS));
   speaker_tone(false);
 }
 
 void speaker_tick(bool alarm) {
-  if (!alarm) {
+  if (switches_mute() || !alarm) {
     speaker_tone(false);
     return;
   }

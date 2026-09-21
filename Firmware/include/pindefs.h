@@ -26,9 +26,12 @@
 #define AC_LEDS_NUM_PIXELS 50 // idk the exact length
 
 // Switches
-#define SW_0_PIN 18
-#define SW_1_PIN 19
-#define SW_2_PIN 20
+#define SW_0_PIN 18 // inhibit
+#define SW_1_PIN 19 // max cooling
+#define SW_2_PIN 20 // mute
+#define SW_INHIBIT_PIN SW_0_PIN
+#define SW_MAX_COOL_PIN SW_1_PIN
+#define SW_MUTE_PIN SW_2_PIN
 
 #define LOAD_EN_PIN 21
 #define PCSPKR_PIN 22

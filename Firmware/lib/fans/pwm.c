@@ -9,6 +9,7 @@
 #include "parameters.h"
 #include "pindefs.h"
 #include "states.h"
+#include "switches.h"
 
 #include <stdbool.h>
 
@@ -30,11 +31,12 @@ static uint32_t g_pwm_wave[PWM_WAVE_STEPS] __attribute__((aligned(1024)));
 void pwm_wave_rebuild(void) {
   system_state_t st = state_get();
   bool on = (st != STATE_STANDBY);
+  bool max = switches_max_cool();
 
   for (unsigned step = 0; step < PWM_WAVE_STEPS; step++) {
     uint32_t bits = 0;
     for (unsigned ch = 0; ch < FAN_COUNT; ch++) {
-      if (k_fans[ch].kind == FAN_NONE) {
+      if (!max && k_fans[ch].kind == FAN_NONE) {
         continue;
       }
       uint8_t duty = on ? g_duty[ch] : 0;

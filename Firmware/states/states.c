@@ -7,6 +7,7 @@
 #include "parameters.h"
 #include "pindefs.h"
 #include "speaker.h"
+#include "switches.h"
 #include "usb_vbus.h"
 
 #include <stdbool.h>
@@ -30,10 +31,14 @@ system_state_t state_get(void) { return g_state; }
 
 TickType_t state_entered(void) { return g_entered; }
 
+static void load_apply(void) {
+  gpio_put(LOAD_EN_PIN, g_state != STATE_STANDBY && !switches_inhibit());
+}
+
 void state_goto(system_state_t next) {
   g_state = next;
   g_entered = xTaskGetTickCount();
-  gpio_put(LOAD_EN_PIN, next != STATE_STANDBY);
+  load_apply();
   indicators_clear();
   k_ops[next].entry();
 }
@@ -83,6 +88,7 @@ void state_task(void *pvParameters) {
   gpio_init(LOAD_EN_PIN);
   gpio_put(LOAD_EN_PIN, 0);
   gpio_set_dir(LOAD_EN_PIN, GPIO_OUT);
+  switches_init();
   usb_vbus_init();
   speaker_init();
   speaker_beep();
@@ -90,6 +96,8 @@ void state_task(void *pvParameters) {
   state_goto(STATE_INIT);
 
   while (true) {
+    switches_tick();
+    load_apply();
     k_ops[g_state].tick(xTaskGetTickCount());
     state_update_warnings();
     speaker_tick(g_state != STATE_INIT && indicators_fast_flashing_red());
