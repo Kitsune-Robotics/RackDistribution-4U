@@ -21,7 +21,7 @@
 #define PCSPKR_PERIOD_MS 1000
 
 // 1 to enable
-#define ENABLE_UF2_LOADER 1
+#define ENABLE_UF2_LOADER 0
 
 // State configs
 #define STATE_INIT_MS 4000
