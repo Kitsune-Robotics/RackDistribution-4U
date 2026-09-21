@@ -3,7 +3,8 @@
 // Fans
 #define FAN_PWM_HZ 25000.0f
 #define FAN_TACH_PPR 2
-#define FAN_RPM_WINDOW_MS 200
+#define FAN_RPM_WINDOW_MS 200 // Window to look for fan pulses
+#define FAN_RPM_STALL_MS 500 // How many MS before we say that a fan is just stalled
 
 // Temperature
 #define A_LITTLE_HOT_ABOVE_AIR_C 8.0f
@@ -21,7 +22,7 @@
 #define PCSPKR_PERIOD_MS 1000
 
 // 1 to enable
-#define ENABLE_UF2_LOADER 0
+#define ENABLE_UF2_LOADER 1
 
 // State configs
 #define STATE_INIT_MS 4000
