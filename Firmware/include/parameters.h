@@ -3,11 +3,12 @@
 // Fans
 #define FAN_PWM_HZ 25000.0f
 #define FAN_TACH_PPR 2
-#define FAN_RPM_WINDOW_MS 200 // Window to look for fan pulses
-#define FAN_RPM_STALL_MS 500 // How many MS before we say that a fan is just stalled
+#define FAN_RPM_WINDOW_MS 200 // Window to look for pulses in
+#define FAN_RPM_STALL_MS 500 // Timeout for seeing an edge
+#define FAN_RPM_LOW_MS 2000 // Time to wait before warning (hopefully fixes random chirps)
 
 // Temperature
-#define A_LITTLE_HOT_ABOVE_AIR_C 8.0f
+#define A_LITTLE_HOT_ABOVE_AIR_C 6.0f
 #define A_LITTLE_HOT_HISTERESIS_C 0.25f
 #define COOLDOWN_COLD_ABOVE_AIR_C 6.0f
 #define TSENSOR0_OFFSET_C 1.9f /* coolant */
