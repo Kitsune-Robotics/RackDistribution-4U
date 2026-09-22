@@ -63,7 +63,7 @@ static void state_update_warnings(void) {
   }
 
   const float t = analog_control_c();
-  const float hot = analog_ambient_c() + A_LITTLE_HOT_ABOVE_AIR_C;
+  const float hot = analog_air_c() + A_LITTLE_HOT_ABOVE_AIR_C;
   const bool was_hot = a_little_hot;
 
   if (t > hot + A_LITTLE_HOT_HISTERESIS_C) {

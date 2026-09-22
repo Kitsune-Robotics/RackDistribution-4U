@@ -13,20 +13,21 @@ static volatile float g_coolant_c = NAN;
 static volatile float g_air_c = NAN;
 static volatile float g_exhaust_c = NAN;
 
-float analog_coolant_c(void) { return g_coolant_c; }
+float analog_coolant_c(void) { return g_coolant_c; } // Coolant Temperature
 
-float analog_air_c(void) { return g_air_c; }
+float analog_exhaust_c(void) { return g_exhaust_c; } // Exhaust Temperature
 
-float analog_exhaust_c(void) { return g_exhaust_c; }
-
-float analog_ambient_c(void) {
-  float t = analog_air_c();
+float analog_air_c(void) {
+  // Ambient Temperature (or fallback if theres an issue)
+  float t = g_air_c;
   return isfinite(t) ? t : AMBIENT_FALLBACK_C;
 }
 
 float analog_control_c(void) {
+  // What we'll use as the control temp
+  // TODO: maybe a fusion at some point?
   float t = analog_coolant_c();
-  return isfinite(t) ? t : analog_ambient_c();
+  return isfinite(t) ? t : analog_air_c();
 }
 
 static uint16_t adc_read_avg(uint ch, unsigned n) {
@@ -60,7 +61,7 @@ static float ntc_c_from_ohms(float r) {
 }
 
 static float read_ntc_c(uint adc_ch, float offset) {
-  uint16_t raw = adc_read_avg(adc_ch, 8);
+  uint16_t raw = adc_read_avg(adc_ch, 12); // TODO: make n tunable
   if (raw <= NTC_SHORT_RAW || raw >= NTC_OPEN_RAW) {
     return NAN;
   }

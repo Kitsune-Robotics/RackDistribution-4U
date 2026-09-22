@@ -15,7 +15,7 @@ void state_cooldown_tick(TickType_t now) {
   }
 
   const float t = analog_control_c();
-  if (t < analog_ambient_c() + COOLDOWN_COLD_ABOVE_AIR_C) {
+  if (t < analog_air_c() + COOLDOWN_COLD_ABOVE_AIR_C) {
     if (cold_since == 0) {
       cold_since = now;
     } else if ((now - cold_since) >= pdMS_TO_TICKS(STATE_COOLDOWN_COLD_MS)) {
