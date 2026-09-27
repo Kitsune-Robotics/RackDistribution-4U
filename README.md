@@ -14,7 +14,7 @@ If you're looking for the latest docs/builds, see our [Releases Page](https://gi
 First, clone this repo (and optionally checkout a branch)
 
 ```shell
-git clone https://github.com/Kitsune-Robotics/RackDistribution-4U.git
+git clone https://github.com/Kitsune-Robotics/RackDistribution-4U.git --recursive
 cd RackDistribution-4U
 ```
 
