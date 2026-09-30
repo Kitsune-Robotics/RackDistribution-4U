@@ -14,7 +14,7 @@ volume() {
 }
 
 if ! dev=$(volume); then
-  tty=(/dev/serial/by-id/usb-Aquacomputer_quadro_*-if00)
+  tty=(/dev/serial/by-id/usb-Kitsune_Robotics_RackDistribution-4U_*-if00)
   [[ -e ${tty[0]} ]] || { echo "no RACKDIST/RPI-RP2 volume" >&2; exit 1; }
   stty -F "${tty[0]}" 1200 || true
   for _ in $(seq 1 40); do dev=$(volume) && break; sleep 0.25; done

@@ -49,6 +49,8 @@ add_executable(rack_distribution
         lib/fans/tach.c
         lib/freertos_support.c
         lib/indicators.c
+        lib/speaker.c
+        lib/switches.c
         lib/neopixel_ws2812/neopixel_ws2812.c
         states/states.c
         states/state_init.c
@@ -56,7 +58,7 @@ add_executable(rack_distribution
         states/state_run.c
         states/state_cooldown.c
         aquacomputer/usb_descriptors.c
-        aquacomputer/aquacomputer.c
+        aquacomputer/hid.c
         aquacomputer/msc_uf2.c
 )
 
@@ -67,6 +69,7 @@ pico_generate_pio_header(rack_distribution
 
 target_include_directories(rack_distribution PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/aquacomputer
+        ${CMAKE_CURRENT_LIST_DIR}/../Software/rackdist
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/lib/fans
         ${CMAKE_CURRENT_LIST_DIR}/lib/neopixel_ws2812
@@ -97,6 +100,7 @@ target_link_libraries(rack_distribution
         hardware_clocks
         hardware_adc
         hardware_flash
+        hardware_pwm
         hardware_sync
         m
         freertos_kernel

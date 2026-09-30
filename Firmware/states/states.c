@@ -2,8 +2,13 @@
 
 #include "analog.h"
 #include "fans.h"
+#include "hardware/gpio.h"
 #include "indicators.h"
 #include "parameters.h"
+#include "pindefs.h"
+#include "speaker.h"
+#include "switches.h"
+#include "usb_vbus.h"
 
 #include <stdbool.h>
 
@@ -26,9 +31,14 @@ system_state_t state_get(void) { return g_state; }
 
 TickType_t state_entered(void) { return g_entered; }
 
+static void load_apply(void) {
+  gpio_put(LOAD_EN_PIN, g_state != STATE_STANDBY && !switches_inhibit());
+}
+
 void state_goto(system_state_t next) {
   g_state = next;
   g_entered = xTaskGetTickCount();
+  load_apply();
   indicators_clear();
   k_ops[next].entry();
 }
@@ -52,16 +62,21 @@ static void state_update_warnings(void) {
     return;
   }
 
-  const float t = analog_tsensor1_c();
+  const float t = analog_control_c();
+  const float hot = analog_air_c() + A_LITTLE_HOT_ABOVE_AIR_C;
+  const bool was_hot = a_little_hot;
 
-  if (t > A_LITTLE_HOT_C + A_LITTLE_HOT_HISTERESIS_C) {
+  if (t > hot + A_LITTLE_HOT_HISTERESIS_C) {
     a_little_hot = true;
-  } else if (t < A_LITTLE_HOT_C - A_LITTLE_HOT_HISTERESIS_C) {
+  } else if (t < hot - A_LITTLE_HOT_HISTERESIS_C) {
     a_little_hot = false;
   }
 
   if (a_little_hot) {
     indicator_flash(&g_indicators.a_little_hot, COLOR_RED);
+    if (!was_hot) {
+      speaker_beep();
+    }
   } else {
     indicator_off(&g_indicators.a_little_hot);
   }
@@ -70,11 +85,22 @@ static void state_update_warnings(void) {
 void state_task(void *pvParameters) {
   (void)pvParameters;
 
+  gpio_init(LOAD_EN_PIN);
+  gpio_put(LOAD_EN_PIN, 0);
+  gpio_set_dir(LOAD_EN_PIN, GPIO_OUT);
+  switches_init();
+  usb_vbus_init();
+  speaker_init();
+  speaker_beep();
+
   state_goto(STATE_INIT);
 
   while (true) {
+    switches_tick();
+    load_apply();
     k_ops[g_state].tick(xTaskGetTickCount());
     state_update_warnings();
+    speaker_tick(g_state != STATE_INIT && indicators_fast_flashing_red());
     vTaskDelay(pdMS_TO_TICKS(25));
   }
 }

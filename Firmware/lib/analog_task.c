@@ -9,9 +9,26 @@
 #include <math.h>
 #include <stdio.h>
 
-static volatile float g_tsensor1_c;
+static volatile float g_coolant_c = NAN;
+static volatile float g_air_c = NAN;
+static volatile float g_exhaust_c = NAN;
 
-float analog_tsensor1_c(void) { return g_tsensor1_c; }
+float analog_coolant_c(void) { return g_coolant_c; } // Coolant Temperature
+
+float analog_exhaust_c(void) { return g_exhaust_c; } // Exhaust Temperature
+
+float analog_air_c(void) {
+  // Ambient Temperature (or fallback if theres an issue)
+  float t = g_air_c;
+  return isfinite(t) ? t : AMBIENT_FALLBACK_C;
+}
+
+float analog_control_c(void) {
+  // What we'll use as the control temp
+  // TODO: maybe a fusion at some point?
+  float t = analog_coolant_c();
+  return isfinite(t) ? t : analog_air_c();
+}
 
 static uint16_t adc_read_avg(uint ch, unsigned n) {
   adc_select_input(ch);
@@ -43,18 +60,29 @@ static float ntc_c_from_ohms(float r) {
   return (1.0f / inv_t) - 273.15f;
 }
 
+static float read_ntc_c(uint adc_ch, float offset) {
+  uint16_t raw = adc_read_avg(adc_ch, 12); // TODO: make n tunable
+  if (raw <= NTC_SHORT_RAW || raw >= NTC_OPEN_RAW) {
+    return NAN;
+  }
+  return ntc_c_from_ohms(ntc_ohms_from_adc(raw)) + offset;
+}
+
 void analog_task(void *pvParameters) {
   (void)pvParameters;
 
   adc_init();
+  adc_gpio_init(TSENSOR_0_PIN);
   adc_gpio_init(TSENSOR_1_PIN);
+  adc_gpio_init(TSENSOR_2_PIN);
 
   while (true) {
-    uint16_t raw = adc_read_avg(TSENSOR_1_ADC_CH, 8);
-    float r = ntc_ohms_from_adc(raw);
-    g_tsensor1_c = ntc_c_from_ohms(r) + TSENSOR1_OFFSET_C;
+    g_coolant_c = read_ntc_c(TSENSOR_0_ADC_CH, TSENSOR0_OFFSET_C);
+    g_air_c = read_ntc_c(TSENSOR_1_ADC_CH, TSENSOR1_OFFSET_C);
+    g_exhaust_c = read_ntc_c(TSENSOR_2_ADC_CH, TSENSOR2_OFFSET_C);
 
-    printf("t1=%.1f C  R=%.0f\n", (double)g_tsensor1_c, (double)r);
+    printf("cool=%.1f air=%.1f exh=%.1f\n", (double)g_coolant_c,
+           (double)g_air_c, (double)g_exhaust_c);
     vTaskDelay(pdMS_TO_TICKS(200));
   }
 }

@@ -17,7 +17,7 @@ make
 
 ## To load
 
-The running firmware is a composite USB device: Quadro HID, CDC, and a `RACKDIST` drive. Copy a UF2 onto that drive to update, or:
+The running firmware is a composite USB device: RackDistribution HID (`1209:0001`), CDC, and a `RACKDIST` drive. Copy a UF2 onto that drive to update, or:
 
 From the build directory:
 

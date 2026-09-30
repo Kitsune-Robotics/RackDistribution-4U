@@ -1,12 +1,11 @@
-#include "aquacomputer.h"
-
 #include "parameters.h"
 #include "pico/unique_id.h"
-#include "tusb.h"
 #include "pico/usb_reset.h"
+#include "rackdist_hid.h"
+#include "tusb.h"
 
-#define USBD_VID AQC_USB_VID
-#define USBD_PID AQC_USB_PID
+#define USBD_VID RACKDIST_USB_VID
+#define USBD_PID RACKDIST_USB_PID
 
 #define USBD_ITF_CDC 0
 #define USBD_ITF_HID 2
@@ -83,18 +82,9 @@ uint8_t const desc_hid_report[] = {
     HID_LOGICAL_MIN(0),
     HID_LOGICAL_MAX_N(255, 2),
     HID_REPORT_SIZE(8),
-
-    HID_REPORT_ID(AQC_STATUS_REPORT_ID) HID_USAGE(0x01),
-    HID_REPORT_COUNT(AQC_STATUS_REPORT_SIZE - 1),
+    HID_REPORT_ID(RACKDIST_STATUS_REPORT_ID) HID_USAGE(0x01),
+    HID_REPORT_COUNT(RACKDIST_STATUS_REPORT_SIZE - 1),
     HID_INPUT(HID_DATA | HID_VARIABLE | HID_ABSOLUTE),
-
-    HID_REPORT_ID(AQC_SAVE_REPORT_ID) HID_USAGE(0x02),
-    HID_REPORT_COUNT(AQC_SAVE_REPORT_SIZE - 1),
-    HID_FEATURE(HID_DATA | HID_VARIABLE | HID_ABSOLUTE),
-
-    HID_REPORT_ID(AQC_CTRL_REPORT_ID) HID_USAGE(0x03),
-    HID_REPORT_COUNT_N(AQC_CTRL_REPORT_SIZE - 1, 2),
-    HID_FEATURE(HID_DATA | HID_VARIABLE | HID_ABSOLUTE),
     HID_COLLECTION_END,
 };
 
@@ -114,11 +104,11 @@ static const uint8_t usbd_desc_cfg[USBD_DESC_LEN] = {
 static char usbd_serial_str[PICO_UNIQUE_BOARD_ID_SIZE_BYTES * 2 + 1];
 
 static const char *const usbd_desc_str[] = {
-    [USBD_STR_MANUF] = "Aquacomputer",
-    [USBD_STR_PRODUCT] = "quadro",
+    [USBD_STR_MANUF] = "Kitsune Robotics",
+    [USBD_STR_PRODUCT] = "RackDistribution-4U",
     [USBD_STR_SERIAL] = usbd_serial_str,
     [USBD_STR_CDC] = "Board CDC",
-    [USBD_STR_HID] = "quadro",
+    [USBD_STR_HID] = "RackDistribution-4U",
 #if ENABLE_UF2_LOADER
     [USBD_STR_MSC] = "UF2",
 #endif

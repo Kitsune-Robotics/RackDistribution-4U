@@ -1,0 +1,44 @@
+name: Software
+
+on:
+  push:
+    branches:
+      - "main"
+    tags:
+      - "*"
+    paths:
+      - "Software/**"
+      - ".github/workflows/software_workflow.yml"
+  pull_request:
+    paths:
+      - "Software/**"
+      - ".github/workflows/software_workflow.yml"
+
+jobs:
+  dkms:
+    runs-on: ubuntu-latest
+    name: DKMS
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            dkms \
+            linux-headers-generic
+
+      - name: Build
+        working-directory: Software/rackdist
+        run: make
+
+      - name: DKMS install
+        working-directory: Software/rackdist
+        run: sudo make dkms-install
+
+      - name: Load
+        run: |
+          sudo modprobe rackdist
+          modinfo rackdist
+          lsmod | grep rackdist

@@ -12,7 +12,7 @@ typedef enum {
 } fan_kind_t;
 
 typedef struct {
-  float c;
+  float dc; /* °C vs analog_ambient_c(); negative would be below */
   uint8_t duty;
 } fan_pt_t;
 
@@ -30,22 +30,22 @@ typedef struct {
     .curve = {__VA_ARGS__}                                                     \
   }
 
-static inline uint8_t fan_duty_at(const fan_ch_t *ch, float t) {
+static inline uint8_t fan_duty_at(const fan_ch_t *ch, float dc) {
   if (!ch || ch->kind == FAN_NONE || ch->n == 0) {
     return 0;
   }
   const fan_pt_t *p = ch->curve;
   unsigned n = ch->n;
-  if (t <= p[0].c) {
+  if (dc <= p[0].dc) {
     return p[0].duty;
   }
-  if (t >= p[n - 1].c) {
+  if (dc >= p[n - 1].dc) {
     return p[n - 1].duty;
   }
   for (unsigned i = 1; i < n; i++) {
-    if (t <= p[i].c) {
-      float span = p[i].c - p[i - 1].c;
-      float u = span > 0.0f ? (t - p[i - 1].c) / span : 0.0f;
+    if (dc <= p[i].dc) {
+      float span = p[i].dc - p[i - 1].dc;
+      float u = span > 0.0f ? (dc - p[i - 1].dc) / span : 0.0f;
       float d = (float)p[i - 1].duty +
                 u * (float)((int)p[i].duty - (int)p[i - 1].duty);
       if (d < 0.0f) {
