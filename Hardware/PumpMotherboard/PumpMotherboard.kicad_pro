@@ -52,8 +52,8 @@
         "zones": {
           "border_display_style": 2,
           "border_hatch_pitch": 0.5,
-          "corner_radius": 0.0,
-          "corner_smoothing": 0,
+          "corner_radius": 0.2,
+          "corner_smoothing": 2,
           "fill_mode": 0,
           "hatch_gap": 1.5,
           "hatch_orientation": 0.0,
@@ -78,20 +78,12 @@
       ],
       "drc_exclusions": [
         [
-          "lib_footprint_mismatch|135463898|103927500|e8de151f-45db-4513-a328-264f1f15422f|00000000-0000-0000-0000-000000000000",
-          "Updated since we know we wont be using the wifi version"
-        ],
-        [
           "starved_thermal|113750000|111262500|b90400e0-cfb4-4879-b9ce-60706c973523|7a1d1b7c-3145-4e99-a526-441bfab914b6|F.Cu",
           "One is fine for this one"
         ],
         [
           "starved_thermal|117607500|86530000|99508eba-4459-4345-8e37-6c39b6d3a917|c33a2c34-01b1-4005-9e18-03ef707ae414|F.Cu",
           ""
-        ],
-        [
-          "starved_thermal|145153898|74340000|b90400e0-cfb4-4879-b9ce-60706c973523|a4171527-070a-436d-9048-4c0982516a7b|F.Cu",
-          "I cant really fit another gnd here so, one is fine"
         ]
       ],
       "meta": {
@@ -228,6 +220,7 @@
       ],
       "track_widths": [
         0.0,
+        0.2,
         0.3,
         0.6,
         1.0,
@@ -704,7 +697,7 @@
         "uuid": "0d3b5c69-c1f2-4eab-9f51-de1d9dac9894"
       }
     ],
-    "used_designators": "U1-2,Q1-10,R1-23,#FLG1-3,H1-4,J1-9,J401,#PWR1-59,L1,M1-8,D1-2,C1-2,A1",
+    "used_designators": "JP1,SW1-2,A1,C1-19,C123-124,L1-2,#PWR1-69,#PWR128,Y1,J1-11,J401,H1-4,#FLG1-3,M1-8,R1-27,R49,Q1-10,D1-2,U1-3",
     "variants": []
   },
   "sheets": [
